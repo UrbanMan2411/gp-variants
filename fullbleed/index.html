@@ -247,21 +247,19 @@
   .hero .meta strong{display:block;font-size:22px;color:#08120D;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
   .hero .meta{border-top:1px solid rgba(8,18,13,.18)}
 
-  /* Hero badges strip — bare on video, all-white logos with dark halo */
+  /* Hero badges strip — original colors, soft white halo for lift over video */
   .hero-badges{
-    margin-top:40px;max-width:720px;
+    margin-top:40px;max-width:560px;
     padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none;
   }
   .hero-badges img{
     display:block;width:100%;height:auto;
-    /* brightness(0) makes every non-transparent pixel black, then
-       invert(1) flips it to pure white. Three layered drop-shadows
-       form the dark halo so the white logos read on any video frame. */
+    /* Soft white halo behind colored logos so they pop on any video frame
+       without erasing the brand colours. */
     filter:
-      brightness(0) invert(1)
-      drop-shadow(0 1px 2px rgba(0,0,0,.7))
-      drop-shadow(0 0 10px rgba(0,0,0,.55))
-      drop-shadow(0 0 2px rgba(0,0,0,.6));
+      drop-shadow(0 0 6px rgba(255,255,255,.85))
+      drop-shadow(0 0 14px rgba(255,255,255,.6))
+      drop-shadow(0 1px 2px rgba(0,0,0,.25));
   }
   @media (max-width:720px){
     .hero-badges{margin-top:28px;max-width:none}
