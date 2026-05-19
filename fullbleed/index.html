@@ -60,10 +60,20 @@
   .btn-ghost:hover{border-color:#08120D}
   .btn .arrow{width:14px;height:14px;display:inline-block}
 
-  /* Header — overlay on hero */
+  /* Header — fixed on top, dark backdrop after scroll for legibility */
   header.site{
-    position:absolute;top:0;left:0;right:0;z-index:10;
-    border-bottom:1px solid rgba(8,18,13,.12);
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg, rgba(10,38,28,.55) 0%, rgba(10,38,28,.0) 100%);
+    backdrop-filter:saturate(140%) blur(0px);
+    -webkit-backdrop-filter:saturate(140%) blur(0px);
+    transition:background .25s ease, backdrop-filter .25s ease;
+  }
+  header.site.scrolled{
+    background:rgba(10,38,28,.86);
+    backdrop-filter:saturate(140%) blur(10px);
+    -webkit-backdrop-filter:saturate(140%) blur(10px);
+    border-bottom-color:rgba(255,255,255,.12);
   }
   header.site .inner{display:flex;align-items:center;justify-content:space-between;height:96px;color:#fff}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:-.01em}
@@ -627,30 +637,38 @@
 <canvas id="sakuraCanvas" class="sakura-canvas" aria-hidden="true"></canvas>
 
 <style>
-  /* Bamboo: two vertical strips pinned to viewport edges; visible only when biz sections are on screen */
-  .bamboo-overlay{
-    position:fixed;top:0;left:0;right:0;bottom:0;
-    pointer-events:none;z-index:1;
-    opacity:0;transition:opacity .5s ease;
+  /* Bamboo overlay removed — landscape background takes its role */
+  .bamboo-overlay{display:none}
+
+  /* Business sections share one fixed landscape backdrop.
+     background-attachment:fixed = no seam between sections; the image
+     stays anchored to the viewport while content scrolls. */
+  .biz-wrap{
+    position:relative;
+    background-color:#FBF6EC;
+    background-image:url("../assets/biz-bg.png");
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
   }
-  .bamboo-overlay.visible{opacity:1}
-  .bamboo{
-    position:absolute;top:0;bottom:0;width:140px;
-    background-repeat:repeat-y;background-size:140px auto;
-    background-position:center top;
-    /* fade in/out at top and bottom of viewport so the strip doesn't have a hard cut */
-    mask-image:linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    opacity:.32;
+  /* Sections inside biz-wrap are transparent so the bg shows through,
+     but each gets a translucent paper wash so cards/text stay readable. */
+  .biz-wrap > section{position:relative;z-index:1;background:transparent !important;border-bottom:0}
+  .biz-wrap > section::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg, rgba(251,246,236,.74) 0%, rgba(251,246,236,.86) 100%);
   }
-  .bamboo-left{left:0}
-  .bamboo-right{right:0;transform:scaleX(-1)}
-  /* Minimal-linear bamboo as inline SVG data-URL, tiles vertically */
-  .bamboo-left, .bamboo-right{
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 720' fill='none' stroke='%2310743F' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'><line x1='62' y1='0' x2='62' y2='720'/><ellipse cx='62' cy='90' rx='9' ry='2.5'/><ellipse cx='62' cy='240' rx='9' ry='2.5'/><ellipse cx='62' cy='390' rx='9' ry='2.5'/><ellipse cx='62' cy='540' rx='9' ry='2.5'/><ellipse cx='62' cy='690' rx='9' ry='2.5'/><g><path d='M62 150 Q78 144 92 132'/><path d='M92 132 Q104 124 116 110'/><path d='M62 150 Q72 142 78 134 M62 150 Q70 156 76 162'/><path d='M92 132 C 99 124 104 112 102 100 C 96 108 91 118 92 132 Z'/><path d='M104 124 C 110 116 114 104 112 92 C 105 102 100 113 104 124 Z'/><path d='M116 110 C 122 100 124 88 121 78 C 114 87 112 100 116 110 Z'/></g><g><path d='M62 310 Q48 304 32 296'/><path d='M32 296 Q20 290 10 280'/><path d='M32 296 C 24 290 17 280 17 268 C 27 274 33 284 32 296 Z'/><path d='M20 290 C 14 282 10 270 12 260 C 19 268 23 280 20 290 Z'/></g><g><path d='M62 460 Q78 454 90 446'/><path d='M90 446 Q104 440 116 432'/><path d='M90 446 C 95 438 97 426 94 416 C 89 425 87 436 90 446 Z'/><path d='M104 440 C 110 432 113 420 110 410 C 104 419 101 430 104 440 Z'/></g><g><path d='M62 610 Q50 604 38 596'/><path d='M38 596 Q26 588 18 578'/><path d='M38 596 C 32 588 28 576 30 566 C 36 575 40 586 38 596 Z'/></g></svg>");
+  /* Catalog: slightly deeper wash so product cards keep contrast */
+  .biz-wrap > #catalog::before{
+    background:linear-gradient(180deg, rgba(245,243,232,.82) 0%, rgba(245,243,232,.92) 100%);
   }
-  @media (max-width:980px){ .bamboo{width:80px;background-size:80px auto;opacity:.22} }
-  @media (max-width:560px){ .bamboo-overlay{display:none} }
+  /* Form section: dark green wash, slight transparency so landscape peeks through */
+  .biz-wrap > .form-section{background:rgba(15,61,46,.92) !important;}
+  /* iOS Safari: background-attachment:fixed is glitchy → fallback */
+  @supports (-webkit-touch-callout: none){
+    .biz-wrap{background-attachment:scroll;background-size:auto 100vh}
+  }
 
   /* Sakura canvas: full-viewport, behind content but above bg */
   .sakura-canvas{
@@ -844,6 +862,15 @@
 </style>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Fixed header: toggle scrolled state after a small offset ──
+  (function fixedHeader(){
+    const h = document.querySelector('header.site');
+    if (!h) return;
+    const onScroll = () => h.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
   // ── Bamboo + sakura overlays ──────────────────────────────────
   (function ambientDecorInit(){
     const biz = document.querySelector('.biz-wrap');
