@@ -56,27 +56,27 @@
   }
   .btn-primary{background:var(--green-900);color:#fff}
   .btn-primary:hover{background:#0a2c21}
-  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
-  .btn-ghost:hover{border-color:#fff}
+  .btn-ghost{background:transparent;color:#08120D;border-color:rgba(8,18,13,.4)}
+  .btn-ghost:hover{border-color:#08120D}
   .btn .arrow{width:14px;height:14px;display:inline-block}
 
   /* Header — overlay on hero */
   header.site{
     position:absolute;top:0;left:0;right:0;z-index:10;
-    border-bottom:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(8,18,13,.12);
   }
-  header.site .inner{display:flex;align-items:center;justify-content:space-between;height:72px;color:#fff}
+  header.site .inner{display:flex;align-items:center;justify-content:space-between;height:72px;color:#08120D}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
   .logo .mark{
-    width:24px;height:24px;border-radius:4px;background:#fff;
-    display:inline-flex;align-items:center;justify-content:center;color:var(--green-900);font-size:12px;font-weight:800;
+    width:24px;height:24px;border-radius:4px;background:#0F3D2E;
+    display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;
     letter-spacing:0;
   }
   nav.site-nav{display:flex;gap:32px}
-  nav.site-nav a{font-size:14px;color:rgba(255,255,255,.85);font-weight:500}
-  nav.site-nav a:hover{color:#fff}
+  nav.site-nav a{font-size:14px;color:rgba(8,18,13,.78);font-weight:600}
+  nav.site-nav a:hover{color:#08120D}
   header.site .actions{display:flex;align-items:center;gap:12px}
-  header.site .phone{font-size:14px;font-weight:600;color:rgba(255,255,255,.9)}
+  header.site .phone{font-size:14px;font-weight:700;color:#08120D}
 
   /* Hero — full bleed image with overlay */
   .hero{
@@ -95,12 +95,12 @@
     width:100%;
     height:100%;
     object-fit:cover;
-    filter:brightness(.7) saturate(.9);
+    filter:none;
   }
   .hero-overlay{
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(15,61,46,.75) 0%, rgba(10,31,24,.85) 100%);
+    background:linear-gradient(180deg, rgba(15,61,46,.13) 0%, rgba(10,31,24,.15) 100%);
     z-index:1;
   }
   .hero-content{
@@ -116,17 +116,17 @@
     letter-spacing:-.02em;
     font-weight:700;
     margin:24px 0 20px;
-    color:#fff;
+    color:#08120D;
     max-width:820px;
   }
-  .hero h1 em{font-style:normal;color:#7bbf95}
+  .hero h1 em{font-style:normal;color:#0F3D2E}
   .hero .sub{
     font-size:19px;
     line-height:1.6;
-    color:rgba(255,255,255,.8);
+    color:rgba(8,18,13,.82);
     max-width:640px;
     margin:0 0 36px;
-    font-weight:300;
+    font-weight:400;
   }
   .hero .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
   .hero .meta{
@@ -137,8 +137,9 @@
     border-top:1px solid rgba(255,255,255,.2);
     max-width:700px;
   }
-  .hero .meta div{font-size:13px;color:rgba(255,255,255,.65)}
-  .hero .meta strong{display:block;font-size:22px;color:#fff;font-weight:600;margin-bottom:4px;letter-spacing:-.01em}
+  .hero .meta div{font-size:13px;color:rgba(8,18,13,.65)}
+  .hero .meta strong{display:block;font-size:22px;color:#08120D;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+  .hero .meta{border-top:1px solid rgba(8,18,13,.18)}
 
   /* Stats strip */
   .stats{padding:48px 0;border-bottom:1px solid var(--line);background:var(--paper-2)}
@@ -281,7 +282,6 @@
 </style>
 </head>
 <body>
-
 <header class="site">
   <div class="container inner">
     <a href="#" class="logo"><span class="mark">G</span>Green panda</a>
@@ -308,13 +308,11 @@
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="container">
-      <div class="eyebrow" style="color:#7bbf95">Оптовый поставщик · с [ЗАМЕНИ: 2014] года</div>
-      <h1>Бытовая химия<br/>для бизнеса <em>оптом</em></h1>
-      <p class="sub">Поставляем профессиональные моющие, чистящие и дезинфицирующие средства напрямую с производства. Стабильные цены, прозрачные условия, отгрузка от [ЗАМЕНИ: 1 паллеты].</p>
+      <div class="eyebrow" style="color:#0F3D2E">ПРОИЗВОДИМ · С 2016 ГОДА</div>
+      <h1><em>Мягкая сила</em> каждый день</h1>
+      <p class="sub">Производим экологически чистые моющие, чистящие и дезинфицирующие средства</p>
       <div class="cta-row">
-        <a href="#request" class="btn btn-primary">Получить оптовый прайс
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        <a href="#request" class="btn btn-primary">Получить прайс</a>
         <a href="#catalog" class="btn btn-ghost">Смотреть каталог</a>
       </div>
       <div class="meta">
@@ -327,7 +325,7 @@
 </section>
 
 <!-- STATS -->
-<section class="stats">
+<section class="stats" data-tweak-block="stats">
   <div class="container stats-grid">
     <div class="stat"><div class="num">[ЗАМЕНИ: 12]</div><div class="lab">лет на оптовом рынке профхимии</div></div>
     <div class="stat"><div class="num">[ЗАМЕНИ: 320]+</div><div class="lab">SKU в собственном каталоге</div></div>
@@ -337,26 +335,26 @@
 </section>
 
 <!-- ADVANTAGES -->
-<section class="block" id="advantages">
+<section class="block" id="advantages" data-tweak-block="advantages">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="eyebrow">Почему мы</div>
-        <h2>Условия, на которых строится оптовая закупка</h2>
+        <h2>Условия сотрудничества</h2>
       </div>
-      <p class="sub">Работаем напрямую с производством, без дилерской наценки. Все условия фиксируются в договоре поставки.</p>
+      <p class="sub"></p>
     </div>
     <div class="features-grid">
       <div class="feature">
         <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-7 9 7v9H3z"/><path d="M9 21v-7h6v7"/></svg></span>
         <h3>Своя цена</h3>
-        <p>Прямой производитель — оптовая стоимость без посредников. <span class="repl">[ЗАМЕНИ: своя цена / прямой производитель]</span></p>
+        <p>Индивидуальные условия для оптовых и розничных сетей</p>
         <div class="num-tag">01 — Производство</div>
       </div>
       <div class="feature">
         <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="13" height="10" rx="1"/><path d="M15 10h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
         <h3>Доставка по региону</h3>
-        <p>Собственная логистика. Отгрузка от паллеты. <span class="repl">[ЗАМЕНИ: доставка по региону за N дней]</span></p>
+        <p>Доставка в любую точку России в кратчайшие сроки</p>
         <div class="num-tag">02 — Логистика</div>
       </div>
       <div class="feature">
@@ -376,14 +374,14 @@
 </section>
 
 <!-- CATALOG -->
-<section class="block" id="catalog" style="background:var(--paper-2)">
+<section class="block" id="catalog" data-tweak-block="catalog" style="background:var(--paper-2)">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="eyebrow">Каталог</div>
-        <h2>Шесть категорий, закрывающих ежедневный спрос</h2>
+        <h2>Шесть средств и весь дом под контролем</h2>
       </div>
-      <p class="sub">Профессиональные концентраты в канистрах 5/10/20 л и розничные форматы для перепродажи.</p>
+      <p class="sub">Профессиональные средства в объемах от 0.5 л до 20 л.</p>
     </div>
     <div class="catalog-grid">
       <a href="#" class="cat-card">
@@ -421,7 +419,7 @@
 </section>
 
 <!-- PROCESS -->
-<section class="block" id="process">
+<section class="block" id="process" data-tweak-block="process">
   <div class="container">
     <div class="section-head">
       <div>
@@ -440,12 +438,12 @@
 </section>
 
 <!-- AUDIENCE -->
-<section class="block" id="audience" style="background:var(--paper-2)">
+<section class="block" id="audience" data-tweak-block="audience" style="background:var(--paper-2)">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="eyebrow">Кому подходит</div>
-        <h2>Работаем с теми, кому нужен стабильный поток химии</h2>
+        <h2>Кто наш покупатель</h2>
       </div>
       <p class="sub">Подбираем ассортимент и формат фасовки под профиль клиента — от розничного магазина до сетевого клининга.</p>
     </div>
@@ -475,7 +473,7 @@
 </section>
 
 <!-- FORM -->
-<section class="form-section" id="request">
+<section class="form-section" id="request" data-tweak-block="request">
   <div class="container form-grid">
     <div>
       <div class="eyebrow">Заявка</div>
@@ -521,12 +519,12 @@
     <div class="top">
       <div class="col">
         <div class="logo"><span class="mark">G</span>Green panda</div>
-        <p class="blurb">Оптовая поставка профессиональной бытовой химии для бизнеса. Производство, склад, доставка по [ЗАМЕНИ: региону].</p>
+        <p class="blurb">Кубань реквизиты</p>
       </div>
       <div class="col">
         <h5>Контакты</h5>
         <a href="tel:+70000000000">[ЗАМЕНИ: +7 (XXX) XXX-XX-XX]</a>
-        <a href="mailto:opt@greenpanda.ru">opt@greenpanda.ru</a>
+        <a href="/cdn-cgi/l/email-protection#1f706f6b5f786d7a7a716f7e717b7e316d6a"><span class="__cf_email__" data-cfemail="4a253a3e0a2d382f2f243a2b242e2b64383f">[email&#160;protected]</span></a>
         <p>[ЗАМЕНИ: пн–пт, 9:00–18:00]</p>
       </div>
       <div class="col">
@@ -540,7 +538,7 @@
         <h5>Документы</h5>
         <a href="#">Реквизиты</a>
         <a href="#">Сертификаты</a>
-        <a href="#">Договор-оферта</a>
+        <a href="#"></a>
         <a href="#">Политика обработки ПДн</a>
       </div>
     </div>
@@ -550,6 +548,157 @@
     </div>
   </div>
 </footer>
+
+<!-- TWEAKS PANEL -->
+<aside id="tweaks-panel" hidden>
+  <div class="tw-head">
+    <strong>Tweaks</strong>
+    <button class="tw-close" type="button" aria-label="Close">×</button>
+  </div>
+  <div class="tw-body">
+    <div class="tw-sect-title">Видимость секций</div>
+    <p class="tw-hint">Снимите галочку, чтобы скрыть блок. «Восстановить всё» возвращает страницу к исходному виду.</p>
+    <div class="tw-toggles" id="tw-toggles"></div>
+    <button class="tw-reset" type="button" id="tw-reset">Восстановить всё</button>
+  </div>
+</aside>
+
+<style>
+  #tweaks-panel{
+    position:fixed;bottom:20px;right:20px;z-index:9999;
+    width:280px;background:#fff;color:#0A1F18;
+    border:1px solid #E3E7E3;border-radius:12px;
+    box-shadow:0 20px 60px rgba(10,31,24,.18), 0 2px 6px rgba(10,31,24,.06);
+    font-family:"Manrope",system-ui,sans-serif;
+    overflow:hidden;
+  }
+  #tweaks-panel[hidden]{display:none}
+  #tweaks-panel .tw-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;border-bottom:1px solid #E3E7E3;
+    background:#F5F6F4;
+  }
+  #tweaks-panel .tw-head strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#0F3D2E;font-weight:700}
+  #tweaks-panel .tw-close{
+    border:0;background:transparent;font-size:22px;line-height:1;cursor:pointer;
+    color:#6B7A72;padding:0 4px;
+  }
+  #tweaks-panel .tw-close:hover{color:#0F3D2E}
+  #tweaks-panel .tw-body{padding:16px}
+  #tweaks-panel .tw-sect-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7A72;font-weight:600;margin-bottom:6px}
+  #tweaks-panel .tw-hint{font-size:12px;color:#6B7A72;margin:0 0 14px;line-height:1.45}
+  #tweaks-panel .tw-toggles{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}
+  #tweaks-panel .tw-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px;border-radius:6px;cursor:pointer;
+    transition:background .12s ease;
+  }
+  #tweaks-panel .tw-row:hover{background:#F5F6F4}
+  #tweaks-panel .tw-row .lab{font-size:14px;font-weight:500;color:#1F352B}
+  #tweaks-panel .tw-row.off .lab{color:#6B7A72;text-decoration:line-through}
+  #tweaks-panel .tw-sw{
+    position:relative;width:34px;height:20px;background:#D1D6CF;border-radius:999px;flex-shrink:0;
+    transition:background .15s ease;
+  }
+  #tweaks-panel .tw-sw::after{
+    content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;
+    box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .15s ease;
+  }
+  #tweaks-panel .tw-row.on .tw-sw{background:#2F8F5C}
+  #tweaks-panel .tw-row.on .tw-sw::after{transform:translateX(14px)}
+  #tweaks-panel .tw-reset{
+    width:100%;padding:10px;border:1px solid #E3E7E3;background:#fff;
+    border-radius:6px;font-family:inherit;font-size:13px;font-weight:600;color:#1F352B;cursor:pointer;
+    transition:.12s ease;
+  }
+  #tweaks-panel .tw-reset:hover{border-color:#0F3D2E;background:#F5F6F4}
+  @media (max-width:560px){
+    #tweaks-panel{left:12px;right:12px;width:auto;bottom:12px}
+  }
+</style>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Tweaks: section visibility ────────────────────────────────
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "show_stats": true,
+    "show_advantages": true,
+    "show_catalog": true,
+    "show_process": true,
+    "show_audience": true,
+    "show_request": true
+  }/*EDITMODE-END*/;
+
+  const BLOCK_LABELS = {
+    show_stats: "Цифры (stats)",
+    show_advantages: "Преимущества",
+    show_catalog: "Каталог категорий",
+    show_process: "Как мы работаем",
+    show_audience: "Кому подходит",
+    show_request: "Форма заявки"
+  };
+
+  const state = { ...TWEAK_DEFAULTS };
+
+  function applyState() {
+    Object.keys(BLOCK_LABELS).forEach(key => {
+      const blockKey = key.replace(/^show_/, '');
+      const el = document.querySelector(`[data-tweak-block="${blockKey}"]`);
+      if (el) el.style.display = state[key] ? '' : 'none';
+    });
+    // refresh toggle UI
+    document.querySelectorAll('#tw-toggles .tw-row').forEach(row => {
+      const key = row.dataset.key;
+      row.classList.toggle('on', !!state[key]);
+      row.classList.toggle('off', !state[key]);
+    });
+  }
+
+  function setTweak(key, value) {
+    state[key] = value;
+    applyState();
+    try {
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{[key]: value}}, '*');
+    } catch (e) {}
+  }
+
+  function buildToggles() {
+    const root = document.getElementById('tw-toggles');
+    root.innerHTML = '';
+    Object.keys(BLOCK_LABELS).forEach(key => {
+      const row = document.createElement('div');
+      row.className = 'tw-row';
+      row.dataset.key = key;
+      row.innerHTML = `<span class="lab">${BLOCK_LABELS[key]}</span><span class="tw-sw"></span>`;
+      row.addEventListener('click', () => setTweak(key, !state[key]));
+      root.appendChild(row);
+    });
+  }
+
+  function showPanel() { document.getElementById('tweaks-panel').hidden = false; }
+  function hidePanel() {
+    document.getElementById('tweaks-panel').hidden = true;
+    try { window.parent.postMessage({type:'__edit_mode_dismissed'}, '*'); } catch(e){}
+  }
+
+  buildToggles();
+  applyState();
+
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') showPanel();
+    if (d.type === '__deactivate_edit_mode') hidePanel();
+  });
+  document.querySelector('#tweaks-panel .tw-close').addEventListener('click', hidePanel);
+  document.getElementById('tw-reset').addEventListener('click', () => {
+    Object.keys(BLOCK_LABELS).forEach(k => state[k] = true);
+    applyState();
+    try {
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits:{...state}}, '*');
+    } catch(e) {}
+  });
+
+  try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e) {}
+</script>
 
 </body>
 <script>
