@@ -321,13 +321,14 @@
   .panda-tablet{
     position:relative;
     width:100%;
-    max-width:560px;
+    max-width:640px;
     margin:0 auto;
-    aspect-ratio: 3 / 4;   /* matches the prompt's portrait crop */
-    --screen-top: 22%;
-    --screen-left: 13%;
-    --screen-right: 13%;
-    --screen-bottom: 14%;
+    aspect-ratio: 2 / 3;          /* matches the PNG (1024×1536) */
+    /* exact screen rect measured from the PNG */
+    --screen-top:    35.4%;
+    --screen-left:   34.4%;
+    --screen-right:  33.8%;
+    --screen-bottom: 38.5%;
   }
   .panda-tablet .pt-image{
     width:100%;height:100%;object-fit:contain;display:block;
