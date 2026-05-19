@@ -405,26 +405,28 @@
     /* invert the dark grey wordmark to white for dark footer */
     filter:brightness(0) invert(1);
   }
+  /* Marks strip sits right under the blurb in the brand column */
   footer.site .footer-marks{
-    display:flex;align-items:center;gap:40px;flex-wrap:wrap;
-    padding:32px 0;border-top:1px solid rgba(255,255,255,.08);
-    border-bottom:1px solid rgba(255,255,255,.08);
-    margin-top:8px;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    margin-top:16px;
   }
   footer.site .footer-marks img{
-    height:54px;width:auto;display:block;opacity:.92;
+    height:44px;width:auto;display:block;opacity:.92;
     transition:opacity .15s ease;
   }
   footer.site .footer-marks img:hover{opacity:1}
-  /* КБХ logo has a white card behind it — let it keep its native colors;
-     the other two get a soft outline glow for contrast on dark green */
-  footer.site .footer-marks img[alt^="Eco"],
+  /* ЕАС: invert dark letters to white for dark-green footer */
   footer.site .footer-marks img[alt^="ЕАС"]{
-    filter:drop-shadow(0 0 4px rgba(255,255,255,.18));
+    filter:brightness(0) invert(1) drop-shadow(0 0 4px rgba(255,255,255,.18));
   }
+  /* Eco badge: soft white glow so the green outline lifts off the green footer */
+  footer.site .footer-marks img[alt^="Eco"]{
+    filter:drop-shadow(0 0 4px rgba(255,255,255,.25));
+  }
+  /* КБХ keeps its white-card native look */
   @media (max-width:560px){
-    footer.site .footer-marks{gap:24px;padding:24px 0}
-    footer.site .footer-marks img{height:40px}
+    footer.site .footer-marks{gap:14px}
+    footer.site .footer-marks img{height:36px}
   }
   footer.site .blurb{font-size:14px;color:#a7b3ad;line-height:1.55;max-width:320px}
   footer.site .bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:12px;color:#7e8c85}
@@ -671,6 +673,11 @@
       <div class="col">
         <div class="logo footer-brand"><img src="../assets/logo-greenpanda.png?v=1" alt="Green Panda" /></div>
         <p class="blurb">ООО «КубаньБытХим» — производство эко-бытовой химии под ТМ Green Panda.</p>
+        <div class="footer-marks" aria-label="Сертификаты и реквизиты">
+          <img src="../assets/logo-eco.png?v=1" alt="Eco Friendly" />
+          <img src="../assets/logo-eac.png?v=2" alt="ЕАС — Евразийское соответствие" />
+          <img src="../assets/logo-kbh.png?v=1" alt="КубаньБытХим — Безопасная чистота" />
+        </div>
       </div>
       <div class="col">
         <h5>Контакты</h5>
@@ -691,11 +698,6 @@
         <a href="#cert" id="certLink" data-cert>Сертификаты</a>
         <a href="#">Политика обработки ПДн</a>
       </div>
-    </div>
-    <div class="footer-marks" aria-label="Сертификаты и реквизиты">
-      <img src="../assets/logo-eco.png?v=1" alt="Eco Friendly" />
-      <img src="../assets/logo-eac.png?v=1" alt="ЕАС — Евразийское соответствие" />
-      <img src="../assets/logo-kbh.png?v=1" alt="КубаньБытХим — Безопасная чистота" />
     </div>
     <div class="bottom">
       <span>© [ЗАМЕНИ: 2014–2026] Green panda. [ЗАМЕНИ: ООО «Грин Панда», ИНН 0000000000]</span>
