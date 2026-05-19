@@ -67,6 +67,7 @@
   }
   header.site .inner{display:flex;align-items:center;justify-content:space-between;height:72px;color:#08120D}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
+  .logo img.logo-img{height:34px;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(255,255,255,.5))}
   .logo .mark{
     width:24px;height:24px;border-radius:4px;background:#0F3D2E;
     display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;
@@ -114,13 +115,19 @@
   .hero-content .eyebrow,
   .hero-content h1,
   .hero-content h1 em,
-  .hero-content .sub,
   .hero-content .meta div,
   .hero-content .meta strong{
     text-shadow:
       0 1px 2px rgba(255,255,255,.55),
       0 0 14px rgba(255,255,255,.45),
       0 1px 1px rgba(0,0,0,.08);
+  }
+  /* White sub needs the opposite — dark halo */
+  .hero-content .sub{
+    text-shadow:
+      0 1px 2px rgba(0,0,0,.65),
+      0 0 14px rgba(0,0,0,.55),
+      0 0 2px rgba(0,0,0,.5);
   }
   .hero h1{
     font-size:clamp(40px, 5.2vw, 72px);
@@ -135,10 +142,10 @@
   .hero .sub{
     font-size:19px;
     line-height:1.6;
-    color:rgba(8,18,13,.82);
+    color:#fff;
     max-width:640px;
     margin:0 0 36px;
-    font-weight:400;
+    font-weight:500;
   }
   .hero .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
   .hero .meta{
@@ -296,7 +303,7 @@
 <body>
 <header class="site">
   <div class="container inner">
-    <a href="#" class="logo"><span class="mark">G</span>Green panda</a>
+    <a href="#" class="logo" aria-label="Green Panda"><img class="logo-img" src="../assets/green_panda_logo.png" alt="Green Panda" /></a>
     <nav class="site-nav">
       <a href="#catalog">Каталог</a>
       <a href="#process">Как работаем</a>
@@ -321,7 +328,7 @@
   <div class="hero-content">
     <div class="container">
       <div class="eyebrow" style="color:#0F3D2E">ПРОИЗВОДИМ · С 2016 ГОДА</div>
-      <h1><em>Мягкая сила</em> каждый день</h1>
+      <h1><em>Мягкая сила чистоты</em><br>На каждый день</h1>
       <p class="sub">Производим экологически чистые моющие, чистящие и дезинфицирующие средства</p>
       <div class="cta-row">
         <a href="#request" class="btn btn-primary">Получить прайс</a>
