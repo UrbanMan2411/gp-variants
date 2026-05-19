@@ -716,7 +716,7 @@
       </div>
       <div class="col">
         <h5>Документы</h5>
-        <a href="#reqs" id="reqsLink" data-reqs>Реквизиты</a>
+        <a href="../assets/docs/kubanbithim-card.doc" id="reqsLink" download="ООО_КубаньБытХим_карточка_предприятия.doc">Реквизиты</a>
         <a href="#cert" id="certLink" data-cert>Сертификаты</a>
         <a href="#">Политика обработки ПДн</a>
       </div>
@@ -800,7 +800,11 @@
         <div><dt>E-mail</dt><dd>sales@kubanbithim.ru, info@kubanbithim.ru</dd></div>
       </dl>
       <div class="reqs-actions">
-        <button type="button" class="btn btn-primary" id="reqsCopyBtn">
+        <a class="btn btn-primary" href="../assets/docs/kubanbithim-card.doc" download="ООО_КубаньБытХим_карточка_предприятия.doc">
+          Скачать карточку предприятия
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"/></svg>
+        </a>
+        <button type="button" class="btn btn-ghost" id="reqsCopyBtn">
           Скопировать реквизиты
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
         </button>
@@ -824,9 +828,14 @@
   }
   .reqs-list dt{margin:0;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);line-height:1.45}
   .reqs-list dd{margin:0;font-size:14px;color:var(--ink-900);line-height:1.5;word-break:break-word}
-  .reqs-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .reqs-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .reqs-actions .btn{align-self:flex-start}
   .reqs-actions .btn.copied{background:#1aa066;pointer-events:none}
+  .reqs-actions .btn-ghost{
+    background:transparent;color:var(--green-900);
+    border-color:rgba(15,61,46,.3);
+  }
+  .reqs-actions .btn-ghost:hover{border-color:var(--green-900)}
   @media (max-width:560px){
     .reqs-body{padding:28px 24px 24px}
     .reqs-list > div{grid-template-columns:1fr;gap:4px;padding:10px 0}
@@ -1285,10 +1294,11 @@
   })();
 
   // ── Company requisites modal ─────────────────────────────────
+  // Footer 'Реквизиты' link is now a direct .doc download. The popup
+  // stays available via the #reqs deep-link / hash navigation.
   (function reqsModalInit(){
-    const link = document.getElementById('reqsLink');
     const modal = document.getElementById('reqsModal');
-    if (!link || !modal) return;
+    if (!modal) return;
 
     function open(){
       modal.hidden = false;
@@ -1301,7 +1311,6 @@
       document.body.classList.remove('sku-modal-open');
       if (location.hash === '#reqs') history.replaceState(null, '', location.pathname + location.search);
     }
-    link.addEventListener('click', e => { e.preventDefault(); open(); });
     modal.addEventListener('click', e => {
       const closer = e.target.closest('[data-close]');
       if (closer) { close(); return; }
