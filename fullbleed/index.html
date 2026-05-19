@@ -321,7 +321,7 @@
   .panda-tablet{
     position:relative;
     width:100%;
-    max-width:640px;
+    max-width:760px;
     margin:0 auto;
     aspect-ratio: 2 / 3;          /* matches the PNG (1024×1536) */
     /* exact screen rect measured from the PNG */
@@ -350,23 +350,33 @@
     left:var(--screen-left);
     right:var(--screen-right);
     bottom:var(--screen-bottom);
-    margin:0;padding:22px 20px;
-    border-radius:6px;            /* slightly rounded to suggest screen corners */
+    margin:0;padding:14px 13px;
+    border-radius:6px;
     background:#fff;color:var(--ink-900);
-    box-shadow:none;              /* shadow lives on the tablet image instead */
-    overflow:auto;                /* form scrolls inside the screen if cramped */
+    box-shadow:none;
+    overflow:hidden;              /* keep it inside the bezel */
     display:flex;flex-direction:column;
   }
-  /* Compress the form so it fits a tablet screen rectangle */
-  .panda-tablet .pt-form h3{font-size:17px;margin:0 0 4px}
-  .panda-tablet .pt-form .fc-sub{margin:0 0 16px;font-size:12.5px}
-  .panda-tablet .pt-form .field{margin-bottom:11px}
-  .panda-tablet .pt-form .field label{font-size:11.5px;margin-bottom:5px}
+  /* Aggressively compress so the whole form sits on the tablet screen */
+  .panda-tablet .pt-form h3{font-size:13px;font-weight:700;margin:0 0 6px;line-height:1.2}
+  .panda-tablet .pt-form .fc-sub{display:none}
+  .panda-tablet .pt-form .field{margin-bottom:6px;display:flex;flex-direction:column}
+  .panda-tablet .pt-form .field label{font-size:9px;font-weight:600;margin-bottom:2px;letter-spacing:.02em;text-transform:uppercase;color:var(--muted)}
   .panda-tablet .pt-form .field input,
-  .panda-tablet .pt-form .field select{padding:9px 11px;font-size:13.5px}
-  .panda-tablet .pt-form .field-row{gap:10px}
-  .panda-tablet .pt-form .btn-primary{padding:12px;font-size:14px}
-  .panda-tablet .pt-form .fine{margin-top:10px;font-size:11px;line-height:1.45}
+  .panda-tablet .pt-form .field select{
+    padding:5px 7px;font-size:10.5px;border-radius:4px;
+    border:1px solid var(--line);background:#fff;font-family:inherit;color:var(--ink-900);
+  }
+  .panda-tablet .pt-form .field input:focus,
+  .panda-tablet .pt-form .field select:focus{outline:none;border-color:var(--green-700);box-shadow:0 0 0 2px rgba(15,61,46,.12)}
+  .panda-tablet .pt-form .field-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:6px}
+  .panda-tablet .pt-form .field-row .field{margin-bottom:0}
+  .panda-tablet .pt-form .btn-primary{
+    padding:7px 8px;font-size:11px;border-radius:4px;
+    margin-top:4px;justify-content:center;
+  }
+  .panda-tablet .pt-form .btn-primary .arrow{width:10px;height:10px}
+  .panda-tablet .pt-form .fine{margin:6px 0 0;font-size:8px;line-height:1.4;color:var(--muted)}
   /* Mobile: drop the panda+tablet visual, full-width form */
   @media (max-width:760px){
     .panda-tablet{max-width:none;aspect-ratio:auto}
@@ -379,7 +389,7 @@
 
   /* Form section */
   .form-section{background:var(--green-900);color:#fff;padding:112px 0;border-bottom:0}
-  .form-section .form-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
+  .form-section .form-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:56px;align-items:center}
   .form-section h2{font-size:clamp(32px,3.2vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:8px 0 18px}
   .form-section .sub{font-size:17px;color:#cfdbd3;line-height:1.6;max-width:440px;margin-bottom:32px}
   .form-section .eyebrow{color:#7bbf95}
