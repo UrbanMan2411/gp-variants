@@ -246,21 +246,22 @@
   .hero .meta strong{display:block;font-size:22px;color:#08120D;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
   .hero .meta{border-top:1px solid rgba(8,18,13,.18)}
 
-  /* Hero slogan — «Давай дружить!» centered under the CTA buttons */
-  .hero-badges{
-    margin-top:40px;max-width:560px;
-    padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none;
-  }
-  .hero-badges-center{margin-left:auto;margin-right:auto;text-align:center}
-  .hero-badges img{
-    display:inline-block;max-width:100%;height:auto;
-    filter:
-      drop-shadow(0 0 6px rgba(255,255,255,.85))
-      drop-shadow(0 0 14px rgba(255,255,255,.6))
-      drop-shadow(0 1px 2px rgba(0,0,0,.25));
+  /* Hero slogan — typographic «Давай дружить!» under the CTA buttons */
+  .hero-slogan{
+    margin-top:44px;
+    font-family:"Manrope",system-ui,-apple-system,sans-serif;
+    font-weight:300;
+    font-size:clamp(34px, 4.4vw, 60px);
+    line-height:1.1;
+    letter-spacing:-.02em;
+    color:#fff;
+    text-shadow:
+      0 1px 2px rgba(0,0,0,.55),
+      0 0 16px rgba(0,0,0,.45),
+      0 0 2px rgba(0,0,0,.55);
   }
   @media (max-width:720px){
-    .hero-badges{margin-top:28px;max-width:none}
+    .hero-slogan{margin-top:28px;text-align:center}
   }
 
   /* Stats strip */
@@ -501,9 +502,7 @@
         <a href="#request" class="btn btn-primary">Получить прайс</a>
         <a href="#catalog" class="btn btn-primary">Смотреть каталог</a>
       </div>
-      <div class="hero-badges hero-badges-center">
-        <img src="../assets/hero-slogan.png?v=2" alt="Давай дружить!" />
-      </div>
+      <div class="hero-slogan">Давай дружить!</div>
     </div>
   </div>
   <div class="hero-fade" aria-hidden="true"></div>
@@ -705,7 +704,7 @@
         <a href="tel:+78617719555">+7 (8617) 719-555</a>
         <a href="mailto:sales@kubanbithim.ru">sales@kubanbithim.ru</a>
         <a href="mailto:info@kubanbithim.ru">info@kubanbithim.ru</a>
-        <p>[ЗАМЕНИ: пн–пт, 9:00–18:00]</p>
+        <p>пн–пт, 9:00–18:00</p>
       </div>
       <div class="col">
         <h5>Каталог</h5>
@@ -776,70 +775,6 @@
   }
   .sakura-canvas.visible{opacity:.85}
   @media (prefers-reduced-motion: reduce){ .sakura-canvas{display:none} }
-</style>
-
-<!-- COMPANY REQUISITES MODAL -->
-<div id="reqsModal" class="sku-modal" hidden aria-hidden="true">
-  <div class="sku-modal-backdrop" data-close></div>
-  <div class="sku-modal-dialog reqs-dialog" role="dialog" aria-modal="true" aria-labelledby="reqsModalTitle">
-    <button class="sku-modal-close" type="button" data-close aria-label="Закрыть">×</button>
-    <div class="reqs-body">
-      <div class="eyebrow">Реквизиты</div>
-      <h3 id="reqsModalTitle">ООО «КубаньБытХим»</h3>
-      <p class="reqs-tagline">Производитель эко-бытовой химии под торговой маркой Green Panda.</p>
-      <dl class="reqs-list">
-        <div><dt>Полное наименование</dt><dd>Общество с ограниченной ответственностью «КубаньБытХим»</dd></div>
-        <div><dt>Сокращённое наименование</dt><dd>ООО «КубаньБытХим»</dd></div>
-        <div><dt>ИНН</dt><dd>2315984520</dd></div>
-        <div><dt>КПП</dt><dd>231501001</dd></div>
-        <div><dt>ОГРН</dt><dd>1152315004005</dd></div>
-        <div><dt>ОКПО</dt><dd>29554630</dd></div>
-        <div><dt>Юридический адрес</dt><dd>353900, РФ, Краснодарский край, г. Новороссийск, ул. Кутузовская, 117</dd></div>
-        <div><dt>Сайт</dt><dd><a href="https://kubanbithim.ru/" target="_blank" rel="noopener">kubanbithim.ru</a></dd></div>
-        <div><dt>Телефон</dt><dd>8 (8617) 60-00-88, 8 (8617) 71-95-55</dd></div>
-        <div><dt>E-mail</dt><dd>sales@kubanbithim.ru, info@kubanbithim.ru</dd></div>
-      </dl>
-      <div class="reqs-actions">
-        <a class="btn btn-primary" href="../assets/docs/kubanbithim-card.doc" download="ООО_КубаньБытХим_карточка_предприятия.doc">
-          Скачать карточку предприятия
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"/></svg>
-        </a>
-        <button type="button" class="btn btn-ghost" id="reqsCopyBtn">
-          Скопировать реквизиты
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<style>
-  .sku-modal-dialog.reqs-dialog{
-    width:min(720px,100%);max-height:calc(100vh - 48px);overflow:auto;
-  }
-  .reqs-body{padding:40px 44px 36px}
-  .reqs-body .eyebrow{margin-bottom:6px}
-  .reqs-body h3{margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-.01em}
-  .reqs-body .reqs-tagline{margin:0 0 24px;font-size:14px;color:var(--muted);line-height:1.55;max-width:540px}
-  .reqs-list{margin:0 0 24px;padding:0;display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
-  .reqs-list > div{
-    display:grid;grid-template-columns:200px 1fr;gap:18px;
-    padding:11px 0;border-bottom:1px solid var(--line);align-items:start;
-  }
-  .reqs-list dt{margin:0;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);line-height:1.45}
-  .reqs-list dd{margin:0;font-size:14px;color:var(--ink-900);line-height:1.5;word-break:break-word}
-  .reqs-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .reqs-actions .btn{align-self:flex-start}
-  .reqs-actions .btn.copied{background:#1aa066;pointer-events:none}
-  .reqs-actions .btn-ghost{
-    background:transparent;color:var(--green-900);
-    border-color:rgba(15,61,46,.3);
-  }
-  .reqs-actions .btn-ghost:hover{border-color:var(--green-900)}
-  @media (max-width:560px){
-    .reqs-body{padding:28px 24px 24px}
-    .reqs-list > div{grid-template-columns:1fr;gap:4px;padding:10px 0}
-  }
 </style>
 
 <!-- CERTIFICATE MODAL -->
@@ -1293,53 +1228,6 @@
     }
   })();
 
-  // ── Company requisites modal ─────────────────────────────────
-  // Footer 'Реквизиты' link is now a direct .doc download. The popup
-  // stays available via the #reqs deep-link / hash navigation.
-  (function reqsModalInit(){
-    const modal = document.getElementById('reqsModal');
-    if (!modal) return;
-
-    function open(){
-      modal.hidden = false;
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('sku-modal-open');
-    }
-    function close(){
-      modal.hidden = true;
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('sku-modal-open');
-      if (location.hash === '#reqs') history.replaceState(null, '', location.pathname + location.search);
-    }
-    modal.addEventListener('click', e => {
-      const closer = e.target.closest('[data-close]');
-      if (closer) { close(); return; }
-    });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
-
-    // Copy-all-requisites button
-    const copyBtn = document.getElementById('reqsCopyBtn');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const lines = [...modal.querySelectorAll('.reqs-list > div')].map(row => {
-          const dt = row.querySelector('dt').textContent.trim();
-          const dd = row.querySelector('dd').textContent.trim();
-          return `${dt}: ${dd}`;
-        });
-        const text = 'ООО «КубаньБытХим»\n\n' + lines.join('\n');
-        navigator.clipboard.writeText(text).then(() => {
-          copyBtn.classList.add('copied');
-          const orig = copyBtn.innerHTML;
-          copyBtn.textContent = 'Скопировано ✓';
-          setTimeout(() => { copyBtn.innerHTML = orig; copyBtn.classList.remove('copied'); }, 1800);
-        }).catch(() => {
-          copyBtn.textContent = 'Не удалось скопировать';
-        });
-      });
-    }
-
-    if (location.hash === '#reqs') setTimeout(open, 60);
-  })();
 
   // ── Certificate modal ─────────────────────────────────────────
   (function certModalInit(){
