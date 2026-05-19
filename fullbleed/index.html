@@ -698,19 +698,17 @@
     background-size:cover;
     background-repeat:no-repeat;
   }
-  /* Sections inside biz-wrap are transparent so the bg shows through,
-     but each gets a translucent paper wash so cards/text stay readable. */
+  /* Sections inside biz-wrap are transparent so the landscape shows through.
+     Single unified paper wash on every section — no per-section overrides,
+     no visible seams between blocks. */
   .biz-wrap > section{position:relative;z-index:1;background:transparent !important;border-bottom:0}
   .biz-wrap > section::before{
     content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(180deg, rgba(251,246,236,.74) 0%, rgba(251,246,236,.86) 100%);
-  }
-  /* Catalog: slightly deeper wash so product cards keep contrast */
-  .biz-wrap > #catalog::before{
-    background:linear-gradient(180deg, rgba(245,243,232,.82) 0%, rgba(245,243,232,.92) 100%);
+    background:rgba(251,246,236,.78);
   }
   /* Form section: dark green wash, slight transparency so landscape peeks through */
   .biz-wrap > .form-section{background:rgba(15,61,46,.92) !important;}
+  .biz-wrap > .form-section::before{display:none}
   /* iOS Safari: background-attachment:fixed is glitchy → fallback */
   @supports (-webkit-touch-callout: none){
     .biz-wrap{background-attachment:scroll;background-size:auto 100vh}
