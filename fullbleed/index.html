@@ -424,16 +424,25 @@
   footer.site .footer-reqs .links .sep{color:#4a5a52;margin:0 6px}
   footer.site .footer-slogan{
     display:flex;justify-content:center;align-items:center;
-    padding:32px 0 8px;
+    padding:8px 0 28px;
   }
   footer.site .footer-slogan img{
     max-width:min(520px, 80%);height:auto;display:block;
-    /* invert the dark-green script to white for the dark footer */
-    filter:brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,.18));
-    opacity:.92;
+    /* Brand green stays; thick white outline via stacked drop-shadows
+       so the script reads on the dark-green footer. */
+    filter:
+      drop-shadow( 1px  0 0 #fff)
+      drop-shadow(-1px  0 0 #fff)
+      drop-shadow( 0  1px 0 #fff)
+      drop-shadow( 0 -1px 0 #fff)
+      drop-shadow( 1px  1px 0 #fff)
+      drop-shadow(-1px -1px 0 #fff)
+      drop-shadow( 1px -1px 0 #fff)
+      drop-shadow(-1px  1px 0 #fff)
+      drop-shadow( 0 0 10px rgba(255,255,255,.35));
   }
   @media (max-width:560px){
-    footer.site .footer-slogan{padding:20px 0 4px}
+    footer.site .footer-slogan{padding:4px 0 20px}
     footer.site .footer-slogan img{max-width:88%}
   }
   footer.site .bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:12px;color:#7e8c85}
@@ -673,6 +682,9 @@
 <!-- FOOTER -->
 <footer class="site" id="contacts">
   <div class="container">
+    <div class="footer-slogan">
+      <img src="../assets/footer-slogan.png?v=2" alt="Давай дружить!" />
+    </div>
     <div class="top">
       <div class="col">
         <div class="logo footer-brand"><img src="../assets/logo-greenpanda.png?v=1" alt="Green Panda" /></div>
@@ -713,9 +725,6 @@
         <a href="#cert" id="certLink" data-cert>Сертификаты</a>
         <a href="#privacy" id="privacyLink" data-privacy>Политика обработки ПДн</a>
       </div>
-    </div>
-    <div class="footer-slogan">
-      <img src="../assets/footer-slogan.png?v=1" alt="Давай дружить!" />
     </div>
     <div class="bottom">
       <span>© 2015–2026 ООО «КубаньБытХим» · ИНН 2315984520 · ТМ Green Panda</span>
