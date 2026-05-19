@@ -215,16 +215,13 @@
   }
   .cat-card:hover{border-color:var(--green-900)}
   .cat-photo{
-    aspect-ratio:4/3;background:var(--paper-2);
+    aspect-ratio:4/3;background:#fff;
     display:flex;align-items:center;justify-content:center;
-    color:var(--muted);font-size:13px;text-align:center;padding:24px;
-    border-bottom:1px solid var(--line);
-    background-image:
-      linear-gradient(45deg,transparent 48%,var(--line) 49%,var(--line) 51%,transparent 52%),
-      linear-gradient(-45deg,transparent 48%,var(--line) 49%,var(--line) 51%,transparent 52%);
-    background-size:32px 32px;background-position:center;
+    padding:24px;border-bottom:1px solid var(--line);
+    overflow:hidden;
   }
-  .cat-photo .ph-inner{background:var(--paper-2);padding:8px 14px;border:1px solid var(--line);border-radius:4px;font-size:12px;color:var(--muted)}
+  .cat-photo img{max-width:100%;max-height:100%;width:auto;height:100%;object-fit:contain;transition:transform .25s ease}
+  .cat-card:hover .cat-photo img{transform:scale(1.04)}
   .cat-body{padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
   .cat-body h4{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em}
   .cat-body .count{font-size:12px;color:var(--muted)}
@@ -410,38 +407,7 @@
       </div>
       <p class="sub">Профессиональные средства в объемах от 0.5 л до 20 л.</p>
     </div>
-    <div class="catalog-grid">
-      <a href="#" class="cat-card">
-        <div class="cat-photo"><span class="ph-inner">[ЗАМЕНИ: фото категории]</span></div>
-        <div class="cat-body"><div><h4>Для пола</h4><div class="count">[ЗАМЕНИ: 42] SKU</div></div>
-          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-photo"><span class="ph-inner">[ЗАМЕНИ: фото категории]</span></div>
-        <div class="cat-body"><div><h4>Для посуды</h4><div class="count">[ЗАМЕНИ: 28] SKU</div></div>
-          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-photo"><span class="ph-inner">[ЗАМЕНИ: фото категории]</span></div>
-        <div class="cat-body"><div><h4>Для стёкол и зеркал</h4><div class="count">[ЗАМЕНИ: 16] SKU</div></div>
-          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-photo"><span class="ph-inner">[ЗАМЕНИ: фото категории]</span></div>
-        <div class="cat-body"><div><h4>Дезинфекция</h4><div class="count">[ЗАМЕНИ: 34] SKU</div></div>
-          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-photo"><span class="ph-inner">[ЗАМЕНИ: фото категории]</span></div>
-        <div class="cat-body"><div><h4>Для сантехники</h4><div class="count">[ЗАМЕНИ: 22] SKU</div></div>
-          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-      <a href="#" class="cat-card">
-        <div class="cat-photo"><span class="ph-inner">[ЗАМЕНИ: фото категории]</span></div>
-        <div class="cat-body"><div><h4>Стирка</h4><div class="count">[ЗАМЕНИ: 38] SKU</div></div>
-          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      </a>
-    </div>
+    <div class="catalog-grid" id="catalogGrid"><!-- cards injected by JS from PRODUCTS --></div>
   </div>
 </section>
 
@@ -577,6 +543,72 @@
 </footer>
 
 <!-- TWEAKS PANEL -->
+<!-- PRODUCT MODAL -->
+<div id="skuModal" class="sku-modal" hidden aria-hidden="true">
+  <div class="sku-modal-backdrop" data-close></div>
+  <div class="sku-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="skuModalTitle">
+    <button class="sku-modal-close" type="button" data-close aria-label="Закрыть">×</button>
+    <div class="sku-modal-grid">
+      <div class="sku-modal-media">
+        <img id="skuModalImg" src="" alt="" />
+      </div>
+      <div class="sku-modal-body">
+        <div class="eyebrow" id="skuModalCategory">GREEN PANDA</div>
+        <h3 id="skuModalTitle">—</h3>
+        <ul class="sku-meta" id="skuModalMeta"></ul>
+        <p class="sku-modal-desc" id="skuModalDesc"></p>
+        <a href="#request" class="btn btn-primary" data-close>Запросить прайс
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sku-modal{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:24px;font-family:"Manrope",system-ui,sans-serif}
+  .sku-modal[hidden]{display:none}
+  .sku-modal-backdrop{position:absolute;inset:0;background:rgba(10,31,24,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:sku-fade .18s ease}
+  .sku-modal-dialog{
+    position:relative;z-index:1;
+    background:#fff;border-radius:18px;
+    width:min(960px,100%);max-height:calc(100vh - 48px);
+    overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.35);
+    animation:sku-pop .22s cubic-bezier(.2,.9,.3,1.1);
+  }
+  @keyframes sku-fade{from{opacity:0}to{opacity:1}}
+  @keyframes sku-pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+  .sku-modal-close{
+    position:absolute;top:14px;right:14px;z-index:2;
+    width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.92);
+    color:#0F3D2E;font-size:22px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);transition:.15s ease;
+  }
+  .sku-modal-close:hover{background:#fff;transform:rotate(90deg)}
+  .sku-modal-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:0;align-items:stretch}
+  .sku-modal-media{background:var(--paper-2);padding:48px;display:flex;align-items:center;justify-content:center;min-height:360px}
+  .sku-modal-media img{max-width:100%;max-height:480px;object-fit:contain;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,.12))}
+  .sku-modal-body{padding:48px 44px;display:flex;flex-direction:column;gap:14px}
+  .sku-modal-body .eyebrow{margin-bottom:4px}
+  .sku-modal-body h3{margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+  .sku-meta{list-style:none;padding:0;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:8px}
+  .sku-meta li{
+    background:var(--green-50);color:var(--green-900);
+    padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.02em;
+  }
+  .sku-modal-desc{margin:0 0 12px;font-size:14.5px;color:var(--ink-700);line-height:1.6;white-space:pre-line}
+  .sku-modal-body .btn-primary{align-self:flex-start;margin-top:4px}
+  @media (max-width:760px){
+    .sku-modal{padding:12px}
+    .sku-modal-grid{grid-template-columns:1fr}
+    .sku-modal-media{min-height:240px;padding:28px}
+    .sku-modal-media img{max-height:280px}
+    .sku-modal-body{padding:28px 24px}
+  }
+  body.sku-modal-open{overflow:hidden}
+</style>
+
 <aside id="tweaks-panel" hidden>
   <div class="tw-head">
     <strong>Tweaks</strong>
@@ -645,6 +677,138 @@
 </style>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Catalog: SKU cards + modal ────────────────────────────────
+  const PRODUCTS = [
+    {
+      id: "soap",
+      title: "Хозяйственное мыло",
+      subtitle: "Средство для мытья посуды и рук — хозяйственное мыло GREEN PANDA",
+      img: "../assets/products/soap.png",
+      sku: "90501",
+      barcode: "4680788441392",
+      volume: "5 л",
+      pack: "4 шт в коробе · 128 шт на паллете",
+      desc: "Концентрированное многофункциональное средство с мягким безопасным действием. Подходит для кухонных и столовых принадлежностей, полов, стен, пластиковых и других поверхностей, посуды, кастрюль, пищевых ёмкостей и оборудования, тары и инвентаря. Может применяться для стирки белья и удаления стойких пятен. Эффективно работает в жёсткой и прохладной воде, не раздражает кожу рук. Безопасно для человека и окружающей среды."
+    },
+    {
+      id: "dishes",
+      title: "Для мытья посуды",
+      subtitle: "Средство для мытья посуды и рук GREEN PANDA",
+      img: "../assets/products/dishes.png",
+      sku: "90505",
+      barcode: "4680788441484",
+      volume: "5 л",
+      pack: "4 шт в коробе · 128 шт на паллете",
+      desc: "Концентрированное средство для мытья посуды и ухода за кожей рук. Эффективно удаляет жир и грязь даже в холодной воде, подходит для замачивания. Отлично пенится, легко смывается, не оставляет разводов. Придаёт посуде сверкающий блеск, устраняет неприятные запахи. Безопасно для человека и окружающей среды."
+    },
+    {
+      id: "laundry",
+      title: "Для стирки",
+      subtitle: "Жидкое средство для стирки всех видов ткани — универсальное",
+      img: "../assets/products/laundry.png",
+      sku: "90506",
+      barcode: "4680788441507",
+      volume: "5 л",
+      pack: "4 шт в коробе · 128 шт на паллете",
+      desc: "Концентрированный гель для автоматической и ручной стирки. Подходит для любых видов ткани (кроме шерсти и шёлка). Формула содержит ПАВ растительного происхождения и комплекс энзимов, эффективно справляющийся с загрязнениями в режиме стирки до 40 °C. Не содержит агрессивных компонентов, полностью вымывается из белья. Предотвращает появление катышков, при длительном использовании устраняет желтизну и серый оттенок."
+    },
+    {
+      id: "glass",
+      title: "Для стёкол и зеркал",
+      subtitle: "Средство для мытья стёкол и зеркальных поверхностей",
+      img: "../assets/products/glass.png",
+      sku: "90502",
+      barcode: "4680788441415",
+      volume: "5 л",
+      pack: "4 шт в коробе · 128 шт на паллете",
+      desc: "Удаляет грязь, пыль, отпечатки пальцев, жировые загрязнения и другие следы с гладких глянцевых поверхностей. Обеспечивает чистоту, прозрачность и блеск без разводов. Оказывает антистатическое действие — препятствует повторному оседанию пыли. Лёгкий свежий аромат."
+    },
+    {
+      id: "floors",
+      title: "Для полов и поверхностей",
+      subtitle: "Универсальное средство для мытья полов и поверхностей",
+      img: "../assets/products/floors.png",
+      sku: "90503",
+      barcode: "4680788441477",
+      volume: "5 л",
+      pack: "4 шт в коробе · 128 шт на паллете",
+      desc: "Для линолеума, кафеля, плитки, ламината, паркета, искусственного камня, дерева, пластика. За счёт специальных компонентов обладает антибактериальным эффектом, устраняет неприятные запахи. Придаёт блеск без разводов, не требует смывания. Без агрессивной химии, биоразлагаемый. Подходит для домов с автономной канализацией."
+    },
+    {
+      id: "plasticizer",
+      title: "Пластификатор для бетона",
+      subtitle: "Противоморозная добавка GREEN PANDA",
+      img: "../assets/products/plasticizer.png",
+      sku: "90507",
+      barcode: "4680788441392",
+      volume: "5 л",
+      pack: "4 шт в коробе · 128 шт на паллете",
+      desc: "Позволяет работать с бетоном и раствором как в тёплое время года, так и при низких температурах. Повышает пластичность смесей, упрощает укладку, улучшает однородность. Применяется при изготовлении бетонов, растворов, стяжек, тротуарной плитки, ж/б конструкций.\nСостав: ≥30% подготовленная вода, ПАВ ≥5%, нитрат кальция ≥5%, хлорид кальция ≥5%, активные микродобавки.\nПрименение: вводить в смесь вместе с последней третью воды затворения; время перемешивания 3–5 минут; температура работы от +5 до +35 °C."
+    },
+  ];
+
+  (function renderCatalog(){
+    const grid = document.getElementById('catalogGrid');
+    if (!grid) return;
+    grid.innerHTML = PRODUCTS.map(p => `
+      <a href="#sku-${p.id}" class="cat-card" data-sku-id="${p.id}">
+        <div class="cat-photo"><img src="${p.img}" alt="${p.title}" loading="lazy" /></div>
+        <div class="cat-body">
+          <div><h4>${p.title}</h4><div class="count">Артикул ${p.sku} · ${p.volume}</div></div>
+          <svg class="cat-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+      </a>
+    `).join('');
+
+    const modal      = document.getElementById('skuModal');
+    const modalImg   = document.getElementById('skuModalImg');
+    const modalTitle = document.getElementById('skuModalTitle');
+    const modalCat   = document.getElementById('skuModalCategory');
+    const modalMeta  = document.getElementById('skuModalMeta');
+    const modalDesc  = document.getElementById('skuModalDesc');
+
+    function open(id){
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      modalImg.src = p.img;
+      modalImg.alt = p.title;
+      modalTitle.textContent = p.title;
+      modalCat.textContent = p.subtitle || 'GREEN PANDA';
+      modalMeta.innerHTML = [
+        p.volume && `Объём ${p.volume}`,
+        p.sku && `Артикул ${p.sku}`,
+        p.barcode && `EAN ${p.barcode}`,
+        p.pack
+      ].filter(Boolean).map(s => `<li>${s}</li>`).join('');
+      modalDesc.textContent = p.desc || '';
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('sku-modal-open');
+      history.replaceState(null, '', '#sku-' + id);
+    }
+    function close(){
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sku-modal-open');
+      if (location.hash.startsWith('#sku-')) history.replaceState(null, '', location.pathname + location.search);
+    }
+
+    grid.addEventListener('click', e => {
+      const card = e.target.closest('[data-sku-id]');
+      if (!card) return;
+      e.preventDefault();
+      open(card.dataset.skuId);
+    });
+    modal.addEventListener('click', e => { if (e.target.closest('[data-close]')) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+
+    // deep link: #sku-xxx auto-opens
+    if (location.hash.startsWith('#sku-')) {
+      const id = location.hash.slice(5);
+      if (PRODUCTS.some(p => p.id === id)) setTimeout(() => open(id), 60);
+    }
+  })();
+
   // ── Tweaks: section visibility ────────────────────────────────
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "show_advantages": true,
