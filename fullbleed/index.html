@@ -530,8 +530,7 @@
       <div class="col">
         <h5>Документы</h5>
         <a href="#">Реквизиты</a>
-        <a href="#">Сертификаты</a>
-        <a href="#"></a>
+        <a href="#cert" id="certLink" data-cert>Сертификаты</a>
         <a href="#">Политика обработки ПДн</a>
       </div>
     </div>
@@ -543,6 +542,54 @@
 </footer>
 
 <!-- TWEAKS PANEL -->
+<!-- CERTIFICATE MODAL -->
+<div id="certModal" class="sku-modal" hidden aria-hidden="true">
+  <div class="sku-modal-backdrop" data-close></div>
+  <div class="sku-modal-dialog cert-dialog" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <button class="sku-modal-close" type="button" data-close aria-label="Закрыть">×</button>
+    <div class="cert-head">
+      <div class="eyebrow">Документы</div>
+      <h3 id="certModalTitle">Сертификат государственной регистрации (СГР), 2026</h3>
+      <p class="cert-sub">Свидетельство о государственной регистрации продукции GREEN PANDA — выдано в 2026 году.</p>
+      <div class="cert-actions">
+        <a id="certDownload" class="btn btn-primary" href="../assets/docs/sgr-green-panda-2026.pdf" download="GREEN_PANDA_SGR_2026.pdf">
+          Скачать PDF
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"/></svg>
+        </a>
+        <a id="certOpen" class="btn btn-ghost" href="../assets/docs/sgr-green-panda-2026.pdf" target="_blank" rel="noopener">
+          Открыть в новой вкладке
+        </a>
+      </div>
+    </div>
+    <div class="cert-viewer">
+      <iframe id="certFrame" title="СГР GREEN PANDA 2026" src="about:blank"></iframe>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sku-modal-dialog.cert-dialog{
+    width:min(1080px,100%);
+    max-height:calc(100vh - 48px);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .cert-head{padding:32px 44px 20px;border-bottom:1px solid var(--line);flex-shrink:0}
+  .cert-head h3{margin:6px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+  .cert-head .cert-sub{margin:0 0 18px;font-size:14px;color:var(--muted);line-height:1.55;max-width:680px}
+  .cert-head .cert-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .cert-head .cert-actions .btn-ghost{
+    background:transparent;color:var(--green-900);border-color:rgba(15,61,46,.3)
+  }
+  .cert-head .cert-actions .btn-ghost:hover{border-color:var(--green-900)}
+  .cert-viewer{flex:1;min-height:520px;background:var(--paper-2)}
+  .cert-viewer iframe{width:100%;height:100%;border:0;display:block;min-height:520px}
+  @media (max-width:760px){
+    .cert-head{padding:24px 22px 16px}
+    .cert-head h3{font-size:18px}
+    .cert-viewer{min-height:60vh}
+  }
+</style>
+
 <!-- PRODUCT MODAL -->
 <div id="skuModal" class="sku-modal" hidden aria-hidden="true">
   <div class="sku-modal-backdrop" data-close></div>
@@ -807,6 +854,38 @@
       const id = location.hash.slice(5);
       if (PRODUCTS.some(p => p.id === id)) setTimeout(() => open(id), 60);
     }
+  })();
+
+  // ── Certificate modal ─────────────────────────────────────────
+  (function certModalInit(){
+    const link  = document.getElementById('certLink');
+    const modal = document.getElementById('certModal');
+    const frame = document.getElementById('certFrame');
+    if (!link || !modal || !frame) return;
+    const PDF_SRC = '../assets/docs/sgr-green-panda-2026.pdf#toolbar=1&navpanes=0&view=FitH';
+
+    function open(){
+      // Load the PDF only when first opened — avoids 4.6 MB on page load
+      if (!frame.dataset.loaded) {
+        frame.src = PDF_SRC;
+        frame.dataset.loaded = '1';
+      }
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('sku-modal-open');
+    }
+    function close(){
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sku-modal-open');
+      if (location.hash === '#cert') history.replaceState(null, '', location.pathname + location.search);
+    }
+
+    link.addEventListener('click', e => { e.preventDefault(); open(); });
+    modal.addEventListener('click', e => { if (e.target.closest('[data-close]:not([download]):not([target])')) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+
+    if (location.hash === '#cert') setTimeout(open, 60);
   })();
 
   // ── Tweaks: section visibility ────────────────────────────────
