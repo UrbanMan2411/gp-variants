@@ -246,15 +246,14 @@
   .hero .meta strong{display:block;font-size:22px;color:#08120D;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
   .hero .meta{border-top:1px solid rgba(8,18,13,.18)}
 
-  /* Hero badges strip — original colors, soft white halo for lift over video */
+  /* Hero slogan — «Давай дружить!» centered under the CTA buttons */
   .hero-badges{
     margin-top:40px;max-width:560px;
     padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none;
   }
+  .hero-badges-center{margin-left:auto;margin-right:auto;text-align:center}
   .hero-badges img{
-    display:block;width:100%;height:auto;
-    /* Soft white halo behind colored logos so they pop on any video frame
-       without erasing the brand colours. */
+    display:inline-block;max-width:100%;height:auto;
     filter:
       drop-shadow(0 0 6px rgba(255,255,255,.85))
       drop-shadow(0 0 14px rgba(255,255,255,.6))
@@ -339,13 +338,6 @@
     position:absolute;inset:0;z-index:0;pointer-events:none;
     background:url("../assets/form-bg.png") center center / cover no-repeat;
   }
-  .form-section .fs-panda{
-    position:absolute;top:50%;left:0;
-    transform:translate(-12%,-50%);
-    height:108%;width:auto;max-width:none;
-    z-index:1;pointer-events:none;
-    filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
-  }
   .form-section .container.form-grid{position:relative;z-index:2}
   /* Left copy column sits over the panda — make every text element
      white with a strong dark halo so it reads on top of fur, apron,
@@ -366,12 +358,6 @@
   .form-section ul li::before{
     /* Bump the check-mark contrast too — it's currently sage green on transparent */
     filter:drop-shadow(0 0 4px rgba(0,0,0,.55));
-  }
-  @media (max-width:980px){
-    .form-section .fs-panda{height:96%;transform:translate(-22%,-50%);opacity:.55}
-  }
-  @media (max-width:760px){
-    .form-section .fs-panda{display:none}
   }
 
   /* Form section */
@@ -413,6 +399,33 @@
   footer.site .col a:hover{color:#fff}
   footer.site .logo{color:#fff;margin-bottom:16px}
   footer.site .logo .mark{background:#fff;color:var(--green-900)}
+  footer.site .footer-brand{display:block}
+  footer.site .footer-brand img{
+    height:46px;width:auto;display:block;
+    /* invert the dark grey wordmark to white for dark footer */
+    filter:brightness(0) invert(1);
+  }
+  footer.site .footer-marks{
+    display:flex;align-items:center;gap:40px;flex-wrap:wrap;
+    padding:32px 0;border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    margin-top:8px;
+  }
+  footer.site .footer-marks img{
+    height:54px;width:auto;display:block;opacity:.92;
+    transition:opacity .15s ease;
+  }
+  footer.site .footer-marks img:hover{opacity:1}
+  /* КБХ logo has a white card behind it — let it keep its native colors;
+     the other two get a soft outline glow for contrast on dark green */
+  footer.site .footer-marks img[alt^="Eco"],
+  footer.site .footer-marks img[alt^="ЕАС"]{
+    filter:drop-shadow(0 0 4px rgba(255,255,255,.18));
+  }
+  @media (max-width:560px){
+    footer.site .footer-marks{gap:24px;padding:24px 0}
+    footer.site .footer-marks img{height:40px}
+  }
   footer.site .blurb{font-size:14px;color:#a7b3ad;line-height:1.55;max-width:320px}
   footer.site .bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:12px;color:#7e8c85}
   footer.site .bottom a{color:#a7b3ad}
@@ -477,8 +490,8 @@
         <a href="#request" class="btn btn-primary">Получить прайс</a>
         <a href="#catalog" class="btn btn-primary">Смотреть каталог</a>
       </div>
-      <div class="hero-badges">
-        <img src="../assets/hero-badges.png?v=5" alt="Green Panda · Eco Friendly · EAC · КубаньБытХим — Безопасная чистота" />
+      <div class="hero-badges hero-badges-center">
+        <img src="../assets/hero-slogan.png?v=1" alt="Давай дружить!" />
       </div>
     </div>
   </div>
@@ -610,7 +623,6 @@
 <!-- FORM -->
 <section class="form-section" id="request" data-tweak-block="request">
   <div class="fs-bg" aria-hidden="true"></div>
-  <img class="fs-panda" src="../assets/panda-mascot.png?v=2" alt="" aria-hidden="true" />
   <div class="container form-grid">
     <div>
       <div class="eyebrow">Заявка</div>
@@ -657,8 +669,8 @@
   <div class="container">
     <div class="top">
       <div class="col">
-        <div class="logo"><span class="mark">G</span>Green panda</div>
-        <p class="blurb">Кубань реквизиты</p>
+        <div class="logo footer-brand"><img src="../assets/logo-greenpanda.png?v=1" alt="Green Panda" /></div>
+        <p class="blurb">ООО «КубаньБытХим» — производство эко-бытовой химии под ТМ Green Panda.</p>
       </div>
       <div class="col">
         <h5>Контакты</h5>
@@ -679,6 +691,11 @@
         <a href="#cert" id="certLink" data-cert>Сертификаты</a>
         <a href="#">Политика обработки ПДн</a>
       </div>
+    </div>
+    <div class="footer-marks" aria-label="Сертификаты и реквизиты">
+      <img src="../assets/logo-eco.png?v=1" alt="Eco Friendly" />
+      <img src="../assets/logo-eac.png?v=1" alt="ЕАС — Евразийское соответствие" />
+      <img src="../assets/logo-kbh.png?v=1" alt="КубаньБытХим — Безопасная чистота" />
     </div>
     <div class="bottom">
       <span>© [ЗАМЕНИ: 2014–2026] Green panda. [ЗАМЕНИ: ООО «Грин Панда», ИНН 0000000000]</span>
