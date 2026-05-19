@@ -114,6 +114,86 @@
     background:linear-gradient(180deg, rgba(15,61,46,.13) 0%, rgba(10,31,24,.15) 100%);
     z-index:1;
   }
+  /* Bottom-edge feather: video → dark green belt */
+  .hero-fade{
+    position:absolute;left:0;right:0;bottom:0;height:220px;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(10,38,28,0)   0%,
+      rgba(10,38,28,.35) 45%,
+      rgba(10,38,28,.85) 82%,
+      #0a261c 100%);
+  }
+  /* Scroll cue at the bottom of the hero */
+  .scroll-cue{
+    position:absolute;left:50%;bottom:36px;transform:translateX(-50%);
+    z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:#fff;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+    text-shadow:0 1px 3px rgba(0,0,0,.55);
+    opacity:.92;
+  }
+  .scroll-cue .mouse{
+    width:22px;height:34px;border:1.5px solid rgba(255,255,255,.85);border-radius:14px;
+    display:flex;justify-content:center;padding-top:6px;
+    box-shadow:0 0 12px rgba(0,0,0,.25);
+  }
+  .scroll-cue .mouse::after{
+    content:"";width:3px;height:7px;background:#fff;border-radius:2px;
+    animation:scrollDot 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollDot{
+    0%{transform:translateY(0);opacity:1}
+    70%{transform:translateY(10px);opacity:.1}
+    100%{transform:translateY(10px);opacity:0}
+  }
+
+  /* Decorative brand belt between hero and content */
+  .brand-belt{
+    position:relative;
+    height:clamp(220px, 22vw, 320px);
+    background:#0a261c;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .brand-belt .belt-dots{
+    position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1.6px);
+    background-size:24px 24px;
+    mask-image:linear-gradient(180deg, rgba(0,0,0,.0) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+    z-index:1;
+  }
+  /* Soft bokeh orbs */
+  .brand-belt .orb{
+    position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;z-index:0;pointer-events:none;
+  }
+  .brand-belt .orb.o1{
+    width:380px;height:380px;left:-60px;top:-120px;
+    background:radial-gradient(circle, #1FB061 0%, transparent 70%);
+  }
+  .brand-belt .orb.o2{
+    width:520px;height:520px;right:-140px;top:-220px;
+    background:radial-gradient(circle, #10743F 0%, transparent 65%);opacity:.7;
+  }
+  .brand-belt .orb.o3{
+    width:300px;height:300px;left:42%;bottom:-160px;
+    background:radial-gradient(circle, #2F8F5C 0%, transparent 70%);opacity:.45;
+  }
+  /* Thin top divider — gives a deliberate "edge" while the gradient still does the feathering */
+  .brand-belt::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:1px;
+    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.18) 50%, transparent 100%);
+    z-index:2;
+  }
+  /* Fade from belt → next section (white paper) */
+  .brand-belt::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:120px;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg, rgba(10,38,28,0) 0%, rgba(255,255,255,.85) 75%, var(--paper) 100%);
+  }
+  @media (max-width:720px){
+    .scroll-cue{bottom:24px}
+    .scroll-cue .label{display:none}
+    .brand-belt{height:160px}
+  }
   .hero-content{
     position:relative;
     z-index:2;
@@ -358,6 +438,19 @@
       </div>
     </div>
   </div>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <a href="#advantages" class="scroll-cue" aria-label="Прокрутите вниз">
+    <span class="mouse"></span>
+    <span class="label">прокрутите вниз</span>
+  </a>
+</section>
+
+<!-- BRAND BELT (decorative bridge between hero and content) -->
+<section class="brand-belt" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="belt-dots"></div>
 </section>
 
 <!-- ADVANTAGES -->
