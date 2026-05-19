@@ -663,7 +663,7 @@
       <a href="#" class="btn btn-primary">Получить прайс
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a>.</p>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="#privacy" data-privacy>политикой обработки персональных данных</a>.</p>
     </form>
   </div>
 </section>
@@ -711,7 +711,7 @@
         <h5>Документы</h5>
         <a href="../assets/docs/kubanbithim-card.doc" id="reqsLink" download="ООО_КубаньБытХим_карточка_предприятия.doc">Реквизиты</a>
         <a href="#cert" id="certLink" data-cert>Сертификаты</a>
-        <a href="#">Политика обработки ПДн</a>
+        <a href="#privacy" id="privacyLink" data-privacy>Политика обработки ПДн</a>
       </div>
     </div>
     <div class="footer-slogan">
@@ -772,6 +772,133 @@
   }
   .sakura-canvas.visible{opacity:.85}
   @media (prefers-reduced-motion: reduce){ .sakura-canvas{display:none} }
+</style>
+
+<!-- PRIVACY POLICY MODAL -->
+<div id="privacyModal" class="sku-modal" hidden aria-hidden="true">
+  <div class="sku-modal-backdrop" data-close></div>
+  <div class="sku-modal-dialog privacy-dialog" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <button class="sku-modal-close" type="button" data-close aria-label="Закрыть">×</button>
+    <div class="privacy-body">
+      <div class="eyebrow">Документы</div>
+      <h3 id="privacyModalTitle">Политика обработки персональных данных</h3>
+      <p class="privacy-meta">ООО «КубаньБытХим» (далее — Оператор), ИНН 2315984520, ОГРН 1152315004005, г. Новороссийск, ул. Кутузовская, 117. Редакция от 19.05.2026.</p>
+
+      <h4>1. Общие положения</h4>
+      <p>Настоящая Политика определяет порядок обработки и защиты персональных данных физических лиц (далее — Субъект ПДн), посещающих сайт <strong>kubanbithim.ru</strong> и взаимодействующих с Оператором. Политика разработана в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+
+      <h4>2. Какие данные мы собираем</h4>
+      <p>В рамках формы заявки на оптовый прайс Оператор обрабатывает следующие персональные данные, добровольно предоставленные Субъектом:</p>
+      <ul>
+        <li>фамилия, имя, отчество (либо имя контактного лица);</li>
+        <li>контактный телефон;</li>
+        <li>адрес электронной почты;</li>
+        <li>тип бизнеса (категория компании);</li>
+        <li>иные данные, добровольно сообщённые Субъектом при общении с менеджером.</li>
+      </ul>
+      <p>Также автоматически могут собираться технические данные: IP-адрес, тип браузера, время визита, источник перехода, файлы cookies — для статистики и поддержания работоспособности сайта.</p>
+
+      <h4>3. Цели обработки</h4>
+      <ul>
+        <li>обработка заявки и подготовка коммерческого предложения;</li>
+        <li>связь с потенциальными и действующими клиентами;</li>
+        <li>заключение и исполнение договоров поставки;</li>
+        <li>информирование о новых продуктах, акциях и условиях сотрудничества (только с явного согласия);</li>
+        <li>сбор анонимной статистики посещаемости сайта.</li>
+      </ul>
+
+      <h4>4. Правовые основания обработки</h4>
+      <p>Согласие Субъекта ПДн, выраженное путём заполнения и отправки формы заявки; статьи 6, 9 Федерального закона № 152-ФЗ; договор поставки или преддоговорные отношения.</p>
+
+      <h4>5. Сроки хранения</h4>
+      <p>Персональные данные обрабатываются и хранятся не дольше, чем этого требуют цели обработки. По истечении срока, а также при отзыве согласия, данные подлежат уничтожению или обезличиванию в течение 30 рабочих дней. Бухгалтерские документы хранятся в сроки, установленные законодательством РФ (как правило, 5 лет).</p>
+
+      <h4>6. Передача третьим лицам</h4>
+      <p>Оператор не передаёт персональные данные третьим лицам, за исключением случаев, прямо предусмотренных законодательством РФ (запросы уполномоченных государственных органов), либо при наличии письменного согласия Субъекта (например, для доставки заказов курьерскими службами).</p>
+
+      <h4>7. Использование файлов cookies</h4>
+      <p>Сайт использует технические и аналитические cookies для корректной работы интерфейса, запоминания настроек и сбора обезличенной статистики. Продолжая пользоваться сайтом после уведомления о cookies, вы выражаете согласие на их использование. Вы можете в любой момент отключить cookies в настройках своего браузера; в этом случае часть функциональности сайта может стать недоступной.</p>
+
+      <h4>8. Меры по защите данных</h4>
+      <p>Оператор принимает организационные и технические меры, необходимые и достаточные для защиты персональных данных от неправомерного доступа, изменения, копирования, распространения и уничтожения, в том числе: ограничение круга лиц, имеющих доступ; хранение на серверах с защитой; передача данных по защищённым каналам (HTTPS).</p>
+
+      <h4>9. Права субъекта персональных данных</h4>
+      <p>Субъект имеет право: получать сведения об обработке его ПДн; требовать уточнения, блокирования или уничтожения данных; отзывать согласие на обработку в любое время; обжаловать действия Оператора в уполномоченный орган по защите прав субъектов ПДн (Роскомнадзор).</p>
+
+      <h4>10. Контакты для обращений</h4>
+      <p>По всем вопросам обработки персональных данных обращайтесь:<br />
+      ООО «КубаньБытХим», 353900, г. Новороссийск, ул. Кутузовская, 117.<br />
+      E-mail: <a href="mailto:info@kubanbithim.ru">info@kubanbithim.ru</a>, тел.: <a href="tel:+78617600088">8 (8617) 60-00-88</a>.</p>
+
+      <div class="privacy-actions">
+        <a class="btn btn-primary" href="../assets/docs/kubanbithim-card.doc" download="ООО_КубаньБытХим_карточка_предприятия.doc">
+          Карточка предприятия
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIES CONSENT BANNER -->
+<div id="cookieBanner" class="cookie-banner" hidden role="region" aria-label="Уведомление о cookies">
+  <div class="cookie-text">
+    Сайт использует cookies для корректной работы и аналитики. Продолжая использовать сайт, вы соглашаетесь с
+    <a href="#privacy" data-privacy>политикой обработки персональных данных</a>.
+  </div>
+  <button type="button" class="btn btn-primary cookie-accept" id="cookieAccept">Принимаю</button>
+</div>
+
+<style>
+  /* Privacy policy modal */
+  .sku-modal-dialog.privacy-dialog{
+    width:min(820px,100%);max-height:calc(100vh - 48px);overflow:auto;
+  }
+  .privacy-body{padding:40px 48px 32px;font-size:14px;line-height:1.65;color:var(--ink-700)}
+  .privacy-body .eyebrow{margin-bottom:8px}
+  .privacy-body h3{margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.01em;color:var(--ink-900);line-height:1.25}
+  .privacy-body .privacy-meta{margin:0 0 24px;font-size:13px;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .privacy-body h4{
+    margin:22px 0 8px;font-size:15px;font-weight:700;color:var(--ink-900);letter-spacing:-.005em;
+  }
+  .privacy-body p, .privacy-body ul{margin:0 0 12px}
+  .privacy-body ul{padding-left:20px}
+  .privacy-body ul li{margin-bottom:4px}
+  .privacy-body a{color:var(--green-900);text-decoration:underline}
+  .privacy-body a:hover{color:#0a2c21}
+  .privacy-actions{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+  @media (max-width:560px){
+    .privacy-body{padding:28px 24px 24px;font-size:13.5px}
+  }
+
+  /* Cookie consent banner */
+  .cookie-banner{
+    position:fixed;left:20px;right:20px;bottom:20px;z-index:9990;
+    max-width:560px;margin-left:auto;margin-right:auto;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    background:#0a261c;color:#dfe7e2;
+    padding:16px 20px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    font-family:"Manrope",system-ui,sans-serif;
+    animation:cookie-rise .35s ease-out;
+  }
+  .cookie-banner[hidden]{display:none}
+  @keyframes cookie-rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .cookie-banner .cookie-text{
+    flex:1;min-width:220px;font-size:13.5px;line-height:1.5;
+  }
+  .cookie-banner .cookie-text a{
+    color:#7bbf95;text-decoration:underline;text-underline-offset:2px;
+  }
+  .cookie-banner .cookie-text a:hover{color:#fff}
+  .cookie-banner .cookie-accept{
+    padding:10px 20px;font-size:14px;flex-shrink:0;
+  }
+  @media (max-width:560px){
+    .cookie-banner{padding:14px 16px;gap:12px;left:12px;right:12px;bottom:12px}
+    .cookie-banner .cookie-accept{width:100%;justify-content:center}
+  }
 </style>
 
 <!-- CERTIFICATE MODAL -->
@@ -1225,6 +1352,51 @@
     }
   })();
 
+
+  // ── Privacy policy modal + cookies consent ────────────────────
+  (function privacyInit(){
+    const modal = document.getElementById('privacyModal');
+    if (!modal) return;
+
+    function open(){
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('sku-modal-open');
+      modal.scrollTop = 0;
+    }
+    function close(){
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('sku-modal-open');
+      if (location.hash === '#privacy') history.replaceState(null, '', location.pathname + location.search);
+    }
+    // Any element marked [data-privacy] anywhere on the page opens the modal
+    document.addEventListener('click', e => {
+      const link = e.target.closest('[data-privacy]');
+      if (link) { e.preventDefault(); open(); }
+    });
+    modal.addEventListener('click', e => { if (e.target.closest('[data-close]')) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+    if (location.hash === '#privacy') setTimeout(open, 60);
+
+    // Cookies banner — show once until accepted
+    const banner = document.getElementById('cookieBanner');
+    const accept = document.getElementById('cookieAccept');
+    const KEY = 'gp_cookies_v1';
+    if (banner && accept) {
+      let accepted = false;
+      try { accepted = localStorage.getItem(KEY) === 'accepted'; } catch(_){}
+      if (!accepted) {
+        // Defer 800ms so it doesn't fight the hero entrance
+        setTimeout(() => { banner.hidden = false; }, 800);
+      }
+      accept.addEventListener('click', () => {
+        try { localStorage.setItem(KEY, 'accepted'); } catch(_){}
+        banner.style.animation = 'cookie-rise .25s ease-in reverse';
+        setTimeout(() => { banner.hidden = true; banner.style.animation = ''; }, 230);
+      });
+    }
+  })();
 
   // ── Certificate modal ─────────────────────────────────────────
   (function certModalInit(){
