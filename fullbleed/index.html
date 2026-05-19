@@ -247,23 +247,24 @@
   .hero .meta strong{display:block;font-size:22px;color:#08120D;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
   .hero .meta{border-top:1px solid rgba(8,18,13,.18)}
 
-  /* Hero badges strip — frosted white pill so logos read on video */
+  /* Hero badges strip — bare on video, all-white logos with dark halo */
   .hero-badges{
-    margin-top:36px;max-width:720px;
-    padding:18px 28px;border-radius:18px;
-    background:rgba(255,255,255,.72);
-    border:1px solid rgba(255,255,255,.4);
-    backdrop-filter:saturate(140%) blur(12px);
-    -webkit-backdrop-filter:saturate(140%) blur(12px);
-    box-shadow:0 10px 30px rgba(8,18,13,.18);
+    margin-top:40px;max-width:720px;
+    padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none;
   }
   .hero-badges img{
     display:block;width:100%;height:auto;
-    /* slight dark drop-shadow so the white-bg logos pop a touch */
-    filter:drop-shadow(0 1px 2px rgba(0,0,0,.06));
+    /* brightness(0) makes every non-transparent pixel black, then
+       invert(1) flips it to pure white. Three layered drop-shadows
+       form the dark halo so the white logos read on any video frame. */
+    filter:
+      brightness(0) invert(1)
+      drop-shadow(0 1px 2px rgba(0,0,0,.7))
+      drop-shadow(0 0 10px rgba(0,0,0,.55))
+      drop-shadow(0 0 2px rgba(0,0,0,.6));
   }
   @media (max-width:720px){
-    .hero-badges{margin-top:24px;padding:14px 18px;border-radius:14px}
+    .hero-badges{margin-top:28px;max-width:none}
   }
 
   /* Stats strip */
