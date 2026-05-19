@@ -247,6 +247,25 @@
   .hero .meta strong{display:block;font-size:22px;color:#08120D;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
   .hero .meta{border-top:1px solid rgba(8,18,13,.18)}
 
+  /* Hero badges strip — frosted white pill so logos read on video */
+  .hero-badges{
+    margin-top:36px;max-width:720px;
+    padding:18px 28px;border-radius:18px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(255,255,255,.4);
+    backdrop-filter:saturate(140%) blur(12px);
+    -webkit-backdrop-filter:saturate(140%) blur(12px);
+    box-shadow:0 10px 30px rgba(8,18,13,.18);
+  }
+  .hero-badges img{
+    display:block;width:100%;height:auto;
+    /* slight dark drop-shadow so the white-bg logos pop a touch */
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.06));
+  }
+  @media (max-width:720px){
+    .hero-badges{margin-top:24px;padding:14px 18px;border-radius:14px}
+  }
+
   /* Stats strip */
   .stats{padding:48px 0;border-bottom:1px solid var(--line);background:var(--paper-2)}
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
@@ -447,10 +466,8 @@
         <a href="#request" class="btn btn-primary">Получить прайс</a>
         <a href="#catalog" class="btn btn-primary">Смотреть каталог</a>
       </div>
-      <div class="meta">
-        <div><strong>[ЗАМЕНИ: 320+]</strong>SKU в наличии</div>
-        <div><strong>[ЗАМЕНИ: 1–3 дня]</strong>доставка по региону</div>
-        <div><strong>Отсрочка</strong>для постоянных клиентов</div>
+      <div class="hero-badges">
+        <img src="../assets/hero-badges.png" alt="Green Panda · Eco Friendly · EAC · КубаньБытХим — Безопасная чистота" />
       </div>
     </div>
   </div>
