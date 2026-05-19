@@ -422,28 +422,28 @@
   footer.site .footer-reqs .links a{color:#7bbf95;display:inline;margin:0;font-size:13px}
   footer.site .footer-reqs .links a:hover{color:#fff}
   footer.site .footer-reqs .links .sep{color:#4a5a52;margin:0 6px}
+  /* Footer slogan — same typographic recipe as the hero h1 em
+     («Мягкая сила чистоты»): Manrope 800, deep brand green,
+     letter-spacing -.02, glow halo. */
   footer.site .footer-slogan{
     display:flex;justify-content:center;align-items:center;
-    padding:8px 0 28px;
+    padding:8px 0 28px;text-align:center;
   }
-  footer.site .footer-slogan img{
-    max-width:min(520px, 80%);height:auto;display:block;
-    /* Brand green stays; thick white outline via stacked drop-shadows
-       so the script reads on the dark-green footer. */
-    filter:
-      drop-shadow( 1px  0 0 #fff)
-      drop-shadow(-1px  0 0 #fff)
-      drop-shadow( 0  1px 0 #fff)
-      drop-shadow( 0 -1px 0 #fff)
-      drop-shadow( 1px  1px 0 #fff)
-      drop-shadow(-1px -1px 0 #fff)
-      drop-shadow( 1px -1px 0 #fff)
-      drop-shadow(-1px  1px 0 #fff)
-      drop-shadow( 0 0 10px rgba(255,255,255,.35));
+  footer.site .footer-slogan em{
+    font-style:normal;
+    font-family:"Manrope",system-ui,-apple-system,sans-serif;
+    font-weight:800;
+    font-size:clamp(38px, 4.4vw, 60px);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    color:#1FB061;            /* brighter brand green for legibility on dark footer */
+    text-shadow:
+      0 1px 2px rgba(255,255,255,.18),
+      0 0 18px rgba(31,176,97,.55),
+      0 0 36px rgba(16,116,63,.35);
   }
   @media (max-width:560px){
     footer.site .footer-slogan{padding:4px 0 20px}
-    footer.site .footer-slogan img{max-width:88%}
   }
   footer.site .bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:12px;color:#7e8c85}
   footer.site .bottom a{color:#a7b3ad}
@@ -594,7 +594,7 @@
     <div class="steps">
       <div class="step"><div class="n">01</div><h4>Заявка</h4><p>Оставляете контакты и тип бизнеса. Перезваниваем в течение [ЗАМЕНИ: 30 минут] в рабочее время.</p></div>
       <div class="step"><div class="n">02</div><h4>Расчёт прайса</h4><p>Менеджер готовит коммерческое предложение под ваш объём и логистику.</p></div>
-      <div class="step"><div class="n">03</div><h4>Договор</h4><p>Подписываем договор поставки. Возможна отсрочка [ЗАМЕНИ: до 30 дней] и индивидуальные условия.</p></div>
+      <div class="step"><div class="n">03</div><h4>Договор</h4><p>Подписываем договор поставки. Рассматриваем индивидуальные условия и отсрочку платежа.</p></div>
       <div class="step"><div class="n">04</div><h4>Поставка</h4><p>Отгружаем со склада в [ЗАМЕНИ: городе]. Регулярные поставки — по графику.</p></div>
     </div>
   </div>
@@ -682,9 +682,7 @@
 <!-- FOOTER -->
 <footer class="site" id="contacts">
   <div class="container">
-    <div class="footer-slogan">
-      <img src="../assets/footer-slogan.png?v=2" alt="Давай дружить!" />
-    </div>
+    <div class="footer-slogan"><em>Давай дружить!</em></div>
     <div class="top">
       <div class="col">
         <div class="logo footer-brand"><img src="../assets/logo-greenpanda.png?v=1" alt="Green Panda" /></div>
