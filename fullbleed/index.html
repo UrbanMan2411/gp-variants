@@ -340,22 +340,35 @@
     background:url("../assets/form-bg.png") center center / cover no-repeat;
   }
   .form-section .fs-panda{
-    position:absolute;top:50%;left:50%;
-    transform:translate(-50%,-46%);
-    height:118%;width:auto;max-width:none;
+    position:absolute;top:50%;left:0;
+    transform:translate(-12%,-50%);
+    height:108%;width:auto;max-width:none;
     z-index:1;pointer-events:none;
     filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
   }
   .form-section .container.form-grid{position:relative;z-index:2}
-  /* Light copy panel needs more contrast against the warm landscape */
+  /* Left copy column sits over the panda — make every text element
+     white with a strong dark halo so it reads on top of fur, apron,
+     and the warm landscape behind. */
+  .form-section h2,
+  .form-section .sub,
+  .form-section ul li{color:#fff !important}
+  .form-section .eyebrow{color:#bff0d0 !important}
   .form-section h2,
   .form-section .sub,
   .form-section ul li,
   .form-section .eyebrow{
-    text-shadow:0 1px 2px rgba(0,0,0,.35), 0 0 14px rgba(0,0,0,.25);
+    text-shadow:
+      0 1px 2px rgba(0,0,0,.75),
+      0 0 12px rgba(0,0,0,.6),
+      0 0 2px rgba(0,0,0,.7);
+  }
+  .form-section ul li::before{
+    /* Bump the check-mark contrast too — it's currently sage green on transparent */
+    filter:drop-shadow(0 0 4px rgba(0,0,0,.55));
   }
   @media (max-width:980px){
-    .form-section .fs-panda{height:90%;transform:translate(-50%,-42%);opacity:.5}
+    .form-section .fs-panda{height:96%;transform:translate(-22%,-50%);opacity:.55}
   }
   @media (max-width:760px){
     .form-section .fs-panda{display:none}
