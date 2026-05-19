@@ -65,19 +65,29 @@
     position:absolute;top:0;left:0;right:0;z-index:10;
     border-bottom:1px solid rgba(8,18,13,.12);
   }
-  header.site .inner{display:flex;align-items:center;justify-content:space-between;height:72px;color:#08120D}
+  header.site .inner{display:flex;align-items:center;justify-content:space-between;height:72px;color:#fff}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
-  .logo img.logo-img{height:34px;width:auto;display:block;filter:drop-shadow(0 1px 2px rgba(255,255,255,.5))}
+  .logo img.logo-img{
+    height:34px;width:auto;display:block;
+    /* invert grey wordmark to white so it matches the new nav color */
+    filter:brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0,0,0,.55));
+  }
   .logo .mark{
     width:24px;height:24px;border-radius:4px;background:#0F3D2E;
     display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;
     letter-spacing:0;
   }
   nav.site-nav{display:flex;gap:32px}
-  nav.site-nav a{font-size:14px;color:rgba(8,18,13,.78);font-weight:600}
-  nav.site-nav a:hover{color:#08120D}
+  nav.site-nav a{
+    font-size:14px;color:#fff;font-weight:600;
+    text-shadow:0 1px 2px rgba(0,0,0,.65), 0 0 10px rgba(0,0,0,.5);
+  }
+  nav.site-nav a:hover{color:#fff;opacity:.85}
   header.site .actions{display:flex;align-items:center;gap:12px}
-  header.site .phone{font-size:14px;font-weight:700;color:#08120D}
+  header.site .phone{
+    font-size:14px;font-weight:700;color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,.65), 0 0 10px rgba(0,0,0,.5);
+  }
 
   /* Hero — full bleed image with overlay */
   .hero{
