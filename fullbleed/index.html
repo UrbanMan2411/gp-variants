@@ -800,6 +800,67 @@
   }
   .sakura-canvas.visible{opacity:.85}
   @media (prefers-reduced-motion: reduce){ .sakura-canvas{display:none} }
+
+  /* ── Print / PDF export ─────────────────────────────────────── */
+  @media print {
+    /* Kill all overlays, popups, banners, animations */
+    .sakura-canvas, .bamboo-overlay,
+    .scroll-cue,
+    #cookieBanner,
+    #tweaks-panel,
+    #skuModal, #certModal, #reqsModal, #privacyModal { display: none !important; }
+
+    /* Background printing on */
+    html, body { background: #FBF6EC !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { color: #0A1F18; }
+
+    /* Header: non-fixed, opaque so it doesn't reprint on every page */
+    header.site {
+      position: static !important;
+      background: rgba(10,38,28,.95) !important;
+      backdrop-filter: none !important;
+    }
+
+    /* Hero: replace video with static panda art (poster fallback) */
+    .hero { min-height: auto !important; padding-bottom: 32px !important; page-break-after: avoid; }
+    .hero-bg video { display: none !important; }
+    .hero-bg { background: url("../assets/biz-bg.png") center/cover no-repeat; }
+    .hero-fade { display: none !important; }
+    .brand-belt { display: none !important; }
+
+    /* Biz wrap in print: drop the landscape PNG entirely (it would
+       balloon the file size by tens of MB when Chrome retiles it
+       per page). Use a flat paper colour instead. */
+    .biz-wrap { background: #FBF6EC !important; background-image: none !important; }
+    .biz-wrap > section::before { background: rgba(251,246,236,.95) !important; }
+    .biz-wrap > .form-section { background: #0F3D2E !important; }
+    .hero-bg { background: #FBF6EC !important; }
+
+    /* Section block sizing */
+    section.block { padding: 28px 0 !important; }
+
+    /* Avoid breaking cards across pages */
+    .feature, .cat-card, .step, .aud, .form-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    /* Each big section starts on a fresh page (only one explicit break: the form) */
+    .form-section { page-break-before: always; break-before: page; }
+
+    /* Hide the form CTA button — useless in PDF */
+    .form-section .form-card .btn-primary,
+    .form-section .form-card .fine { /* keep for legal */ display: revert; }
+
+    /* Sticky bg fix for footer */
+    footer.site { background: #0a261c !important; }
+    .form-section .fs-bg { display: none !important; }
+
+    /* Anchor links in PDF should keep visual style only */
+    a { text-decoration: none; color: inherit; }
+
+    /* Page setup */
+    @page { size: A4; margin: 12mm; }
+  }
 </style>
 
 <!-- PRIVACY POLICY MODAL -->
