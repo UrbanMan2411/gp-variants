@@ -315,80 +315,38 @@
   .aud p{margin:0;font-size:14px;color:var(--ink-700);line-height:1.55}
   .aud .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-900);font-weight:600}
 
-  /* Panda holding a tablet — the form lives ON the tablet screen.
-     Adjust these four % values once the actual image lands; they map
-     the empty-screen rectangle inside the PNG. */
-  .panda-tablet{
-    position:relative;
-    width:100%;
-    max-width:720px;
-    margin:0 auto;
-    aspect-ratio: 2 / 3;          /* matches the PNG (1024×1536) */
-    /* exact screen rect measured from the PNG */
-    --screen-top:    35.9%;
-    --screen-left:   24.4%;
-    --screen-right:  24.2%;
-    --screen-bottom: 18.0%;
+  /* Form section — landscape backdrop with the panda standing behind
+     the form card. Form size returns to the original .form-card. */
+  .form-section{position:relative;overflow:hidden}
+  .form-section .fs-bg{
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:url("../assets/form-bg.png") center center / cover no-repeat;
   }
-  .panda-tablet .pt-image{
-    width:100%;height:100%;object-fit:contain;display:block;
-    filter:drop-shadow(0 18px 40px rgba(0,0,0,.18));
+  .form-section .fs-panda{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-46%);
+    height:118%;width:auto;max-width:none;
+    z-index:1;pointer-events:none;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
   }
-  /* Fallback while the PNG is absent: render a tablet outline so the
-     scaffold is still visible in dev */
-  .panda-tablet .pt-image.pt-missing{
-    visibility:hidden;
+  .form-section .container.form-grid{position:relative;z-index:2}
+  /* Light copy panel needs more contrast against the warm landscape */
+  .form-section h2,
+  .form-section .sub,
+  .form-section ul li,
+  .form-section .eyebrow{
+    text-shadow:0 1px 2px rgba(0,0,0,.35), 0 0 14px rgba(0,0,0,.25);
   }
-  .panda-tablet .pt-image.pt-missing + .pt-form::after{
-    content:"⬛ panda-tablet.png ещё не загружен — форма всё равно живая";
-    position:absolute;left:0;right:0;bottom:-44px;text-align:center;
-    color:#cfdbd3;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  @media (max-width:980px){
+    .form-section .fs-panda{height:90%;transform:translate(-50%,-42%);opacity:.5}
   }
-  .panda-tablet .pt-form{
-    position:absolute;
-    top:var(--screen-top);
-    left:var(--screen-left);
-    right:var(--screen-right);
-    bottom:var(--screen-bottom);
-    margin:0;padding:22px 22px;
-    border-radius:8px;
-    background:#fff;color:var(--ink-900);
-    box-shadow:none;
-    overflow:hidden;              /* keep content inside the bezel */
-    display:flex;flex-direction:column;
-  }
-  .panda-tablet .pt-form h3{font-size:18px;font-weight:700;margin:0 0 4px;line-height:1.2}
-  .panda-tablet .pt-form .fc-sub{margin:0 0 14px;font-size:12px;color:var(--muted);line-height:1.4}
-  .panda-tablet .pt-form .field{margin-bottom:12px;display:flex;flex-direction:column}
-  .panda-tablet .pt-form .field label{font-size:10.5px;font-weight:700;margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-  .panda-tablet .pt-form .field input,
-  .panda-tablet .pt-form .field select{
-    padding:9px 11px;font-size:13px;border-radius:5px;
-    border:1px solid var(--line);background:#fff;font-family:inherit;color:var(--ink-900);
-  }
-  .panda-tablet .pt-form .field input:focus,
-  .panda-tablet .pt-form .field select:focus{outline:none;border-color:var(--green-700);box-shadow:0 0 0 2px rgba(15,61,46,.12)}
-  .panda-tablet .pt-form .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-  .panda-tablet .pt-form .field-row .field{margin-bottom:0}
-  .panda-tablet .pt-form .btn-primary{
-    padding:11px 14px;font-size:13px;border-radius:5px;
-    margin-top:4px;justify-content:center;
-  }
-  .panda-tablet .pt-form .btn-primary .arrow{width:12px;height:12px}
-  .panda-tablet .pt-form .fine{margin:10px 0 0;font-size:10.5px;line-height:1.45;color:var(--muted)}
-  /* Mobile: drop the panda+tablet visual, full-width form */
   @media (max-width:760px){
-    .panda-tablet{max-width:none;aspect-ratio:auto}
-    .panda-tablet .pt-image{display:none}
-    .panda-tablet .pt-form{
-      position:static;border-radius:14px;
-      padding:28px 24px;box-shadow:0 24px 60px rgba(0,0,0,.18);
-    }
+    .form-section .fs-panda{display:none}
   }
 
   /* Form section */
   .form-section{background:var(--green-900);color:#fff;padding:112px 0;border-bottom:0}
-  .form-section .form-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:56px;align-items:center}
+  .form-section .form-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
   .form-section h2{font-size:clamp(32px,3.2vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:8px 0 18px}
   .form-section .sub{font-size:17px;color:#cfdbd3;line-height:1.6;max-width:440px;margin-bottom:32px}
   .form-section .eyebrow{color:#7bbf95}
@@ -623,6 +581,8 @@
 
 <!-- FORM -->
 <section class="form-section" id="request" data-tweak-block="request">
+  <div class="fs-bg" aria-hidden="true"></div>
+  <img class="fs-panda" src="../assets/panda-tablet.png" alt="" aria-hidden="true" />
   <div class="container form-grid">
     <div>
       <div class="eyebrow">Заявка</div>
@@ -635,33 +595,30 @@
         <li>Образцы по запросу — [ЗАМЕНИ: условия]</li>
       </ul>
     </div>
-    <div class="panda-tablet" aria-hidden="false">
-      <img class="pt-image" src="../assets/panda-tablet.png" alt="Панда GREEN PANDA с планшетом" onerror="this.classList.add('pt-missing')" />
-      <form class="form-card pt-form" onsubmit="event.preventDefault();return false;">
-        <h3>Оставьте заявку</h3>
-        <p class="fc-sub">Поля отмечены звёздочкой — обязательны.</p>
-        <div class="field"><label for="name">Имя *</label><input id="name" type="text" placeholder="Иван Петров" required /></div>
-        <div class="field-row">
-          <div class="field"><label for="phone">Телефон *</label><input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required /></div>
-          <div class="field"><label for="email">E-mail *</label><input id="email" type="email" placeholder="you@company.ru" required /></div>
-        </div>
-        <div class="field">
-          <label for="biz">Тип бизнеса *</label>
-          <select id="biz" required>
-            <option value="">Выберите тип</option>
-            <option>Розничный магазин / сеть</option>
-            <option>Клининговая компания</option>
-            <option>HoReCa (отель, ресторан, кейтеринг)</option>
-            <option>Управляющая компания / ЖКХ</option>
-            <option>Производство / другое</option>
-          </select>
-        </div>
-        <a href="#" class="btn btn-primary">Получить прайс
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a>.</p>
-      </form>
-    </div>
+    <form class="form-card" onsubmit="event.preventDefault();return false;">
+      <h3>Оставьте заявку</h3>
+      <p class="fc-sub">Поля отмечены звёздочкой — обязательны. Это макет: данные никуда не отправляются.</p>
+      <div class="field"><label for="name">Имя *</label><input id="name" type="text" placeholder="Иван Петров" required /></div>
+      <div class="field-row">
+        <div class="field"><label for="phone">Телефон *</label><input id="phone" type="tel" placeholder="+7 (___) ___-__-__" required /></div>
+        <div class="field"><label for="email">E-mail *</label><input id="email" type="email" placeholder="you@company.ru" required /></div>
+      </div>
+      <div class="field">
+        <label for="biz">Тип бизнеса *</label>
+        <select id="biz" required>
+          <option value="">Выберите тип</option>
+          <option>Розничный магазин / сеть</option>
+          <option>Клининговая компания</option>
+          <option>HoReCa (отель, ресторан, кейтеринг)</option>
+          <option>Управляющая компания / ЖКХ</option>
+          <option>Производство / другое</option>
+        </select>
+      </div>
+      <a href="#" class="btn btn-primary">Получить прайс
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a>.</p>
+    </form>
   </div>
 </section>
 
