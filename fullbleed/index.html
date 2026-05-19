@@ -453,6 +453,9 @@
   <div class="belt-dots"></div>
 </section>
 
+<!-- ─── BUSINESS SECTIONS WRAPPER (bamboo + sakura applied here) ─── -->
+<div class="biz-wrap">
+
 <!-- ADVANTAGES -->
 <section class="block" id="advantages" data-tweak-block="advantages">
   <div class="container">
@@ -601,6 +604,8 @@
   </div>
 </section>
 
+</div><!-- /.biz-wrap -->
+
 <!-- FOOTER -->
 <footer class="site" id="contacts">
   <div class="container">
@@ -637,6 +642,49 @@
 </footer>
 
 <!-- TWEAKS PANEL -->
+<!-- ─── BAMBOO + SAKURA OVERLAYS ─── -->
+<div class="bamboo-overlay" aria-hidden="true">
+  <div class="bamboo bamboo-left"></div>
+  <div class="bamboo bamboo-right"></div>
+</div>
+<canvas id="sakuraCanvas" class="sakura-canvas" aria-hidden="true"></canvas>
+
+<style>
+  /* Bamboo: two vertical strips pinned to viewport edges; visible only when biz sections are on screen */
+  .bamboo-overlay{
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    pointer-events:none;z-index:1;
+    opacity:0;transition:opacity .5s ease;
+  }
+  .bamboo-overlay.visible{opacity:1}
+  .bamboo{
+    position:absolute;top:0;bottom:0;width:140px;
+    background-repeat:repeat-y;background-size:140px auto;
+    background-position:center top;
+    /* fade in/out at top and bottom of viewport so the strip doesn't have a hard cut */
+    mask-image:linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image:linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    opacity:.32;
+  }
+  .bamboo-left{left:0}
+  .bamboo-right{right:0;transform:scaleX(-1)}
+  /* Minimal-linear bamboo as inline SVG data-URL, tiles vertically */
+  .bamboo-left, .bamboo-right{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 720' fill='none' stroke='%2310743F' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'><line x1='62' y1='0' x2='62' y2='720'/><ellipse cx='62' cy='90' rx='9' ry='2.5'/><ellipse cx='62' cy='240' rx='9' ry='2.5'/><ellipse cx='62' cy='390' rx='9' ry='2.5'/><ellipse cx='62' cy='540' rx='9' ry='2.5'/><ellipse cx='62' cy='690' rx='9' ry='2.5'/><g><path d='M62 150 Q78 144 92 132'/><path d='M92 132 Q104 124 116 110'/><path d='M62 150 Q72 142 78 134 M62 150 Q70 156 76 162'/><path d='M92 132 C 99 124 104 112 102 100 C 96 108 91 118 92 132 Z'/><path d='M104 124 C 110 116 114 104 112 92 C 105 102 100 113 104 124 Z'/><path d='M116 110 C 122 100 124 88 121 78 C 114 87 112 100 116 110 Z'/></g><g><path d='M62 310 Q48 304 32 296'/><path d='M32 296 Q20 290 10 280'/><path d='M32 296 C 24 290 17 280 17 268 C 27 274 33 284 32 296 Z'/><path d='M20 290 C 14 282 10 270 12 260 C 19 268 23 280 20 290 Z'/></g><g><path d='M62 460 Q78 454 90 446'/><path d='M90 446 Q104 440 116 432'/><path d='M90 446 C 95 438 97 426 94 416 C 89 425 87 436 90 446 Z'/><path d='M104 440 C 110 432 113 420 110 410 C 104 419 101 430 104 440 Z'/></g><g><path d='M62 610 Q50 604 38 596'/><path d='M38 596 Q26 588 18 578'/><path d='M38 596 C 32 588 28 576 30 566 C 36 575 40 586 38 596 Z'/></g></svg>");
+  }
+  @media (max-width:980px){ .bamboo{width:80px;background-size:80px auto;opacity:.22} }
+  @media (max-width:560px){ .bamboo-overlay{display:none} }
+
+  /* Sakura canvas: full-viewport, behind content but above bg */
+  .sakura-canvas{
+    position:fixed;top:0;left:0;width:100vw;height:100vh;
+    pointer-events:none;z-index:2;
+    opacity:0;transition:opacity .5s ease;
+  }
+  .sakura-canvas.visible{opacity:.85}
+  @media (prefers-reduced-motion: reduce){ .sakura-canvas{display:none} }
+</style>
+
 <!-- CERTIFICATE MODAL -->
 <div id="certModal" class="sku-modal" hidden aria-hidden="true">
   <div class="sku-modal-backdrop" data-close></div>
@@ -819,6 +867,134 @@
 </style>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Bamboo + sakura overlays ──────────────────────────────────
+  (function ambientDecorInit(){
+    const biz = document.querySelector('.biz-wrap');
+    const bambooOverlay = document.querySelector('.bamboo-overlay');
+    const canvas = document.getElementById('sakuraCanvas');
+    if (!biz || !canvas) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // ── Sakura petal particle engine ────────────────────────────
+    const ctx = canvas.getContext('2d');
+    let dpr = devicePixelRatio || 1;
+    let W = canvas.width  = window.innerWidth  * dpr;
+    let H = canvas.height = window.innerHeight * dpr;
+    canvas.style.width  = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    let running = false;
+    let rafId = null;
+    let wind = 1;            // scroll-velocity-driven wind multiplier
+    let lastScrollY = window.scrollY;
+    let lastScrollT = performance.now();
+    const PETAL_COUNT = Math.max(14, Math.min(28, Math.round(window.innerWidth / 60)));
+    const PETALS = [];
+    const COLORS = [
+      'rgba(255, 192, 203, .85)',
+      'rgba(255, 182, 199, .82)',
+      'rgba(252, 213, 222, .78)',
+      'rgba(255, 168, 188, .80)'
+    ];
+
+    function rand(min,max){ return min + Math.random()*(max-min); }
+
+    function makePetal(reset){
+      return {
+        x: rand(0, W),
+        y: reset ? -rand(20, 200) * dpr : rand(-H, H*0.3),
+        size: rand(7, 13) * dpr,
+        vy: rand(0.5, 1.6) * dpr,         // base fall speed
+        vx: rand(-0.4, 0.6) * dpr,        // base drift
+        rot: rand(0, Math.PI*2),
+        vr: rand(-0.04, 0.04),
+        sway: rand(0.6, 1.8),
+        swayPhase: rand(0, Math.PI*2),
+        color: COLORS[Math.floor(Math.random()*COLORS.length)]
+      };
+    }
+    for (let i=0;i<PETAL_COUNT;i++) PETALS.push(makePetal(false));
+
+    function resize(){
+      dpr = devicePixelRatio || 1;
+      W = canvas.width  = window.innerWidth  * dpr;
+      H = canvas.height = window.innerHeight * dpr;
+      canvas.style.width  = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+    }
+    window.addEventListener('resize', resize);
+
+    // Scroll-driven wind: faster scroll → stronger sideways push + fall
+    window.addEventListener('scroll', () => {
+      const now = performance.now();
+      const dt = Math.max(8, now - lastScrollT);
+      const dy = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      lastScrollT = now;
+      const v = Math.abs(dy) / dt;           // pixels per ms
+      // Map velocity 0..3 px/ms → wind 1..4×
+      wind = Math.min(5, 1 + v * 1.2);
+    }, { passive: true });
+
+    function drawPetal(p){
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      // 5-petal-ish almond shape (simplified: 2 mirrored arcs)
+      ctx.beginPath();
+      const w = p.size, h = p.size * 1.4;
+      ctx.moveTo(0, -h*0.5);
+      ctx.quadraticCurveTo( w*0.7, -h*0.15, 0, h*0.5);
+      ctx.quadraticCurveTo(-w*0.7, -h*0.15, 0, -h*0.5);
+      ctx.fill();
+      // tiny notch line on top half for petal hint
+      ctx.strokeStyle = 'rgba(220,120,150,.5)';
+      ctx.lineWidth = Math.max(0.8, dpr*0.6);
+      ctx.beginPath();
+      ctx.moveTo(0, -h*0.45);
+      ctx.lineTo(0,  h*0.15);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function step(){
+      ctx.clearRect(0, 0, W, H);
+      // Decay wind back to 1 each frame
+      wind = wind > 1 ? Math.max(1, wind - 0.04) : 1;
+      const t = performance.now() * 0.001;
+      for (let i=0;i<PETALS.length;i++){
+        const p = PETALS[i];
+        // wind affects both x drift and y fall
+        const sway = Math.sin(t * p.sway + p.swayPhase) * 0.6 * dpr;
+        p.x += (p.vx + sway) * wind;
+        p.y += p.vy * wind;
+        p.rot += p.vr * wind;
+        if (p.y > H + 40*dpr || p.x < -60*dpr || p.x > W + 60*dpr) {
+          Object.assign(p, makePetal(true));
+        }
+        drawPetal(p);
+      }
+    }
+
+    function loop(){
+      if (!running){ rafId = null; return; }
+      step();
+      rafId = requestAnimationFrame(loop);
+    }
+
+    // Show/hide overlays only when business sections are on screen.
+    // Setup the observer AFTER state/funcs are declared.
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        bambooOverlay && bambooOverlay.classList.toggle('visible', e.isIntersecting);
+        canvas.classList.toggle('visible', e.isIntersecting);
+        running = e.isIntersecting;
+        if (running && !rafId) loop();
+      });
+    }, { rootMargin: '-5% 0px -5% 0px', threshold: 0 });
+    io.observe(biz);
+  })();
+
   // ── Catalog: SKU cards + modal ────────────────────────────────
   const PRODUCTS = [
     {
