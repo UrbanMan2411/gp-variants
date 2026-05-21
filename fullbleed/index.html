@@ -443,11 +443,11 @@
   }
   footer.site .footer-slogan img{
     width:clamp(240px, 32vw, 420px);height:auto;display:block;
-    /* white halo so the dark-green script reads on the dark footer */
+    /* subtle white lift so the dark-green script separates from the
+       dark footer — kept gentle, not a glowing halo */
     filter:
-      drop-shadow(0 0 6px rgba(255,255,255,.9))
-      drop-shadow(0 0 16px rgba(255,255,255,.55))
-      drop-shadow(0 1px 2px rgba(0,0,0,.25));
+      drop-shadow(0 0 3px rgba(255,255,255,.45))
+      drop-shadow(0 1px 2px rgba(0,0,0,.3));
   }
   @media (max-width:560px){
     footer.site .footer-slogan{padding:4px 0 20px}
@@ -689,7 +689,7 @@
 <!-- FOOTER -->
 <footer class="site" id="contacts">
   <div class="container">
-    <div class="footer-slogan"><img src="../assets/footer-slogan.png?v=3" alt="Давай дружить!" /></div>
+    <div class="footer-slogan"><img src="../assets/footer-slogan.png?v=4" alt="Давай дружить!" /></div>
     <div class="top">
       <div class="col">
         <div class="logo footer-brand"><img src="../assets/logo-greenpanda.png?v=1" alt="Green Panda" /></div>
